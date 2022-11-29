@@ -5,25 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Articulos</h2>
+
+<div class="row mt-4">
+    <nav class="col-md-2 navbar navbar-expand-md navbar-light bg-light sidebar align-top mb-4">
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarArticles" aria-controls="navbarArticles" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse align-self-start" id="navbarArticles">
+            <ul class="navbar-nav">
+                @using (Html.BeginForm("Index", "Tienda", FormMethod.Get))
+                {
+                    <li class="nav-item">@Html.ActionLink("Todos", "Index", new { id = "" }, new { @class = "nav-link" })</li>
+                   
+                    <li class="nav-item"> @Html.TextBox("strCadenaBusqueda", ViewBag.BusquedaActual as string, new { @class = "form-control", placeholder = "Buscar" })</li>
 
 
+        <li class="nav-item"> <input type="submit" value="Buscar y/o filtrar" class="btn btn-inicio nav-link" /></li>
+                }
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        
-    <div class="col-md-6 col-lg-3 col-xs-12 mb-4">
-        <div class="card" >
-            <img class="card-img-top" src=@Html.DisplayFor(modelItem => item.Foto) alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Precio)</p>
-                @Html.ActionLink("Comprar", "Details", routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-            </div>
+
+            </ul>
         </div>
-    </div>
+    </nav>
 
-    }
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-4">
+            <div class="row">
+                @foreach (var item in Model)
+                {       
+                    <div class="col-md-6 col-lg-3 col-xs-12 mb-4">
+                        <div class="card text-center">
+                            <img class="card-img-top" src=~/Content/Images/@item.Foto alt="Card image cap">                        
+                            <div class="card-body border-top">
+                                <h5 class="card-title">@Html.Raw((item.Nombre.Length > 28 ? item.Nombre.Substring(0, 27) : item.Nombre))</h5>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.Precio)</p>
+                                @Html.ActionLink("Comprar", "Details", routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        
+    </main>
 </div>
+
+
+
 

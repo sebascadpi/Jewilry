@@ -5,21 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
 
-<div>
-    <div class="row">
-        <div class="col-lg-5">
-            <img class="card-img-top max-width: 100%" src=@Html.DisplayFor(model => model.Foto) alt="Card image cap">
-        </div>
-        <div class="col-lg-7 text-center bg-light">
+<div class="row mt-4">
+    <div class="col-6 item-photo">
+        <img style="max-width:100%;" src="~/Content/Images/@Html.DisplayFor(model => model.Foto)" />
+    </div>
+    <div class="col-5" style="border:0px solid gray">
+        <row>
+            <!-- Datos del vendedor y titulo del producto -->
+            <h3>@Html.Raw((Model.Nombre.Length > 35 ? Model.Nombre.Substring(0, 35) : Model.Nombre))</h3>
+            @if (Model.Nombre.Length > 35)
+            {
+                <h3>@Model.Nombre.Substring(35)</h3>
+            }
 
-            <h2>@Html.DisplayFor(model => model.Nombre)</h2>
-            
-        </div>
-    </div> 
+
+
+            <!-- Precios -->
+            <h6 class="title-price mt-3"><small>PRECIO </small></h6>
+            <h3 style="margin-top:0px;">@Html.DisplayFor(model => model.Precio)</h3>
+
+            <!-- Detalles especificos del producto -->
+            <!-- Botones de compra -->
+
+            <div class="section mt-4 mb-4" style="padding-bottom:20px;padding-top:20px;">
+                
+            @Html.ActionLink("Añadir carrito", "prueba", "Tienda", new { id = @Html.DisplayFor(model => model.Id) }, new { @class = "btn btn-primary" })
+
+            </div>
+        </row>
+        <row>
+            <p>Detalles del producto</p>
+
+            <div style="width:100%;border-top:1px solid silver">
+                <p style="padding:15px;">
+                    <small>
+                        @Html.DisplayFor(model => model.Descripcion)
+                    </small>
+                </p>
+            </div>
+        </row>
+    </div>
+
+    
 </div>
+
 
 
 <div>

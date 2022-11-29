@@ -17,6 +17,7 @@ namespace Jewilry.Assemblers
             art.Precio = en.Precio;
             art.Stock = en.Stock;
             art.Foto = en.Foto;
+            art.Descripcion = en.Descripcion;
 
             return art;
         }

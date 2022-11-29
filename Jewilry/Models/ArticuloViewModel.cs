@@ -17,6 +17,11 @@ namespace Jewilry.Models
         [StringLength(maximumLength:200, ErrorMessage = "El nombre no puede tener mas de 200 caracteres")]
         public string Nombre { get; set; }
 
+        [Display(Prompt = "Descripcion del articulo", Description = "Descripcion del articulo", Name = "Descripcion")]
+        [Required(ErrorMessage = "Debe indicar un Descripcion para el articulo")]
+        [StringLength(maximumLength: 200, ErrorMessage = "El Descripcion no puede tener mas de 200 caracteres")]
+        public string Descripcion { get; set; }
+
         [Display(Prompt = "Foto del articulo", Description = "Foto del articulo", Name = "Foto")]
         [Required(ErrorMessage = "Debe indicar una Foto para el articulo")]
         [StringLength(maximumLength: 200, ErrorMessage = "El Foto no puede tener mas de 200 caracteres")]
