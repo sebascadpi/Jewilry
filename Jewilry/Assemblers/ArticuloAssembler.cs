@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using JewilryGenNHibernate.EN.JoyeriaJewirly;
+using Jewilry.Models;
+
+namespace Jewilry.Assemblers
+{
+    public class ArticuloAssembler
+    {
+        public ArticuloViewModel ConvertENToModelUI(ArticuloEN en)
+        {
+            ArticuloViewModel art = new ArticuloViewModel();
+            art.Id = en.Id;
+            art.Nombre = en.Nombre;
+            art.Precio = en.Precio;
+            art.Stock = en.Stock;
+            art.Foto = en.Foto;
+
+            return art;
+        }
+
+        public IList<ArticuloViewModel> ConvertListENToModel(IList<ArticuloEN> ens)
+        {
+            IList<ArticuloViewModel> arts = new List<ArticuloViewModel>();
+
+            foreach(ArticuloEN en in ens)
+            {
+                arts.Add(ConvertENToModelUI(en));
+            }
+            return arts;
+        }
+    }
+}
