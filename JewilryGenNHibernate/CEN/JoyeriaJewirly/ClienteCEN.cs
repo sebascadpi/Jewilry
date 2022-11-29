@@ -91,17 +91,6 @@ public void BorrarCliente (int id
         _IClienteCAD.BorrarCliente (id);
 }
 
-public string Login (int p_Cliente_OID, string p_pass)
-{
-        string result = null;
-        ClienteEN en = _IClienteCAD.ReadOIDDefault (p_Cliente_OID);
-
-        if (en != null && en.Pass.Equals (Utils.Util.GetEncondeMD5 (p_pass)))
-                result = this.GetToken (en.Id);
-
-        return result;
-}
-
 public ClienteEN DameCliente (int id
                               )
 {
@@ -117,6 +106,10 @@ public System.Collections.Generic.IList<ClienteEN> DameClientes (int first, int 
 
         list = _IClienteCAD.DameClientes (first, size);
         return list;
+}
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN> DameClientePorEmail (string p_email)
+{
+        return _IClienteCAD.DameClientePorEmail (p_email);
 }
 
 

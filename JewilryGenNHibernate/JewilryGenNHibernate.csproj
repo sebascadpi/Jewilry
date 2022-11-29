@@ -120,10 +120,12 @@
 			
 			
 			
+			<Compile Include="CEN\JoyeriaJewirly\ClienteCEN_Login.cs" />
 			
 			
 			
 			<Compile Include="CEN\JoyeriaJewirly\ClienteCEN_CambiarContrasena.cs" />
+			
 			
 	<Compile Include="EN\JoyeriaJewirly\ArticuloEN.cs" />
 	<Compile Include="CEN\JoyeriaJewirly\ArticuloCEN.cs" />

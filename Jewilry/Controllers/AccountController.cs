@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Jewilry.Models;
+using JewilryGenNHibernate.CEN.JoyeriaJewirly;
 
 namespace Jewilry.Controllers
 {
@@ -79,7 +80,19 @@ namespace Jewilry.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    ClienteCEN cli = new ClienteCEN();
+                    string token = cli.Login(model.Email, model.Password);
+                    if(token != null)
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Intento de iniciode sesión no válido.");
+                        return View(model);
+                    }
+
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -147,7 +160,7 @@ namespace Jewilry.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(ClienteViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -156,7 +169,12 @@ namespace Jewilry.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+
+                    ClienteCEN cliCEN = new ClienteCEN();
+
+                    cliCEN.CrearCliente(model.Password,model.Nombre,model.Apellidos, model.Email, model.Genero, int.Parse(model.Telefono), model.Direccion);
+
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

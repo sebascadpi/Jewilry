@@ -22,7 +22,7 @@
 						<column name="apellidos"  not-null="true"/>
 					</property>
 					<property name="Email" type="string"> 
-						<column name="email"  not-null="true"/>
+						<column name="email"  unique="true" not-null="true"/>
 					</property>
 					<property name="Genero" > 
 						<column name="genero"  not-null="true"/>
@@ -87,5 +87,6 @@
 		 </class>	
 		  
 		  <query name="ClienteENReadAllHQL">from ClienteEN</query>
+		  <query name="ClienteENdameClientePorEmailHQL"><![CDATA[FROM ClienteEN as cli where cli.Email= :p_email]]></query>
 		</hibernate-mapping>
 	

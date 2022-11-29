@@ -19,5 +19,23 @@ namespace JewilryGenNHibernate.CEN.JoyeriaJewirly
 {
 public partial class ClienteCEN
 {
+public string Login (string p_email, string p_pass)
+{
+        /*PROTECTED REGION ID(JewilryGenNHibernate.CEN.JoyeriaJewirly_Cliente_login) ENABLED START*/
+        string result = null;
+        IList<ClienteEN> listaEn = DameClientePorEmail (p_email);
+
+        if(listaEn.Count > 0)
+        {
+            ClienteEN en = listaEn[0];
+            if (en.Pass.Equals(Utils.Util.GetEncondeMD5(p_pass)))
+                result = this.GetToken(en.Id);
+        }
+
+       
+
+        return result;
+        /*PROTECTED REGION END*/
+}
 }
 }

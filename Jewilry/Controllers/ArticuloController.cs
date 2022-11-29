@@ -33,7 +33,10 @@ namespace Jewilry.Controllers
         // GET: Articulo/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ArticuloEN artEN2 = new ArticuloCAD().ReadOIDDefault(id);
+
+            ArticuloViewModel listViewModel = new ArticuloAssembler().ConvertENToModelUI(artEN2);
+            return View(listViewModel);
         }
 
         // GET: Articulo/Create

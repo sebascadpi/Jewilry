@@ -287,5 +287,36 @@ public System.Collections.Generic.IList<ClienteEN> DameClientes (int first, int 
 
         return result;
 }
+
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN> DameClientePorEmail (string p_email)
+{
+        System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN> result;
+        try
+        {
+                SessionInitializeTransaction ();
+                //String sql = @"FROM ClienteEN self where FROM ClienteEN as cli where cli.Email= :p_email";
+                //IQuery query = session.CreateQuery(sql);
+                IQuery query = (IQuery)session.GetNamedQuery ("ClienteENdameClientePorEmailHQL");
+                query.SetParameter ("p_email", p_email);
+
+                result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN>();
+                SessionCommit ();
+        }
+
+        catch (Exception ex) {
+                SessionRollBack ();
+                if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+                        throw ex;
+                throw new JewilryGenNHibernate.Exceptions.DataLayerException ("Error in ClienteCAD.", ex);
+        }
+
+
+        finally
+        {
+                SessionClose ();
+        }
+
+        return result;
+}
 }
 }

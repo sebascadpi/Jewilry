@@ -30,5 +30,9 @@ ClienteEN DameCliente (int id
 
 
 System.Collections.Generic.IList<ClienteEN> DameClientes (int first, int size);
+
+
+
+System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN> DameClientePorEmail (string p_email);
 }
 }
