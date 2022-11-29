@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="JewilryGenNHibernate"
+		                   namespace="JewilryGenNHibernate.EN.JoyeriaJewirly">
+		    
+		    
+			
+				<class name="LineaPedidoEN" table="LineaPedido"> 
+				  	
+						<id name="Id" column="idLineaPedido" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Unidades" type="integer"> 
+						<column name="unidades"  not-null="true"/>
+					</property>
+					<property name="Precio" type="integer"> 
+						<column name="precio"  not-null="true"/>
+					</property>
+			
+			
+			
+		  			
+						<many-to-one name="Articulo" class="JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN" >	
+								<column name="FK_idArticulo_idArticulo"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="Pedido" class="JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN" >	
+								<column name="FK_idPedido_idPedido"/> 
+						</many-to-one>
+											 					
+			
+			
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="LineaPedidoENReadAllHQL">from LineaPedidoEN</query>
+		  <query name="LineaPedidoENlineasPedidoHQL"><![CDATA[select lin FROM LineaPedidoEN as lin inner join lin.Pedido as ped where ped.Id = :p_idPedido]]></query>
+		</hibernate-mapping>
+	

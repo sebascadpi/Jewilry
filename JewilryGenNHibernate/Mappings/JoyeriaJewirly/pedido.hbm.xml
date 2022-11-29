@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="JewilryGenNHibernate"
+		                   namespace="JewilryGenNHibernate.EN.JoyeriaJewirly">
+		    
+		    
+			
+				<class name="PedidoEN" table="Pedido"> 
+				  	
+						<id name="Id" column="idPedido" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+					<property name="Fecha" type="date"> 
+						<column name="fecha" />
+					</property>
+					<property name="Direccion" type="string"> 
+						<column name="direccion" />
+					</property>
+					<property name="Localidad" type="string"> 
+						<column name="localidad" />
+					</property>
+					<property name="Provincia" type="string"> 
+						<column name="provincia" />
+					</property>
+					<property name="CodigoPostal" type="string"> 
+						<column name="codigoPostal" />
+					</property>
+					<property name="TipoPago" type="string"> 
+						<column name="tipoPago" />
+					</property>
+					<property name="TipoTarjeta" type="string"> 
+						<column name="tipoTarjeta" />
+					</property>
+					<property name="NumeroTarjeta" type="long"> 
+						<column name="numeroTarjeta" />
+					</property>
+					<property name="Total" type="float"> 
+						<column name="total" />
+					</property>
+			
+			
+			
+		  			
+						<bag name="LineaPedido" cascade="delete">
+							<key>
+							
+								
+								<column name="FK_idPedido_idPedido"/>
+					      	</key>
+							<one-to-many class="JewilryGenNHibernate.EN.JoyeriaJewirly.LineaPedidoEN"/>
+					    </bag>
+					
+			
+		  			
+						<many-to-one name="Cliente" class="JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN" >	
+								<column name="FK_idCliente_idCliente"/> 
+						</many-to-one>
+											 					
+			
+			
+		  			
+						<many-to-one name="Descuento" class="JewilryGenNHibernate.EN.JoyeriaJewirly.DescuentoEN" >	
+								<column name="FK_idDescuento_idDescuento"/> 
+						</many-to-one>
+											 					
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		  			
+					
+							<many-to-one name="Recibo" class="JewilryGenNHibernate.EN.JoyeriaJewirly.ReciboEN" >
+								<column name="FK_idRecibo_idRecibo"/> 
+        					</many-to-one>
+					 
+						
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="PedidoENReadAllHQL">from PedidoEN</query>
+		  <query name="PedidoENpedidosClienteHQL"><![CDATA[Select ped FROM PedidoEN as ped inner join ped.Cliente as cli where cli.Id = :p_idCliente and ped.Estado != 1 ]]></query>
+		</hibernate-mapping>
+	

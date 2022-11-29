@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="JewilryGenNHibernate"
+		                   namespace="JewilryGenNHibernate.EN.JoyeriaJewirly">
+		    
+		    
+			
+				<class name="ValoracionEN" table="Valoracion"> 
+				  	
+						<id name="Id" column="idValoracion" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Comentario" type="string"> 
+						<column name="comentario"  not-null="true"/>
+					</property>
+					<property name="Valor" type="integer"> 
+						<column name="valor"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+		  			
+						<many-to-one name="Articulo" class="JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN" >	
+								<column name="FK_idArticulo_idArticulo"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="Cliente" class="JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN" >	
+								<column name="FK_idCliente_idCliente"/> 
+						</many-to-one>
+											 					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="ValoracionENReadAllHQL">from ValoracionEN</query>
+		  <query name="ValoracionENcalcularMediaHQL"><![CDATA[Select avg(va.Valor) FROM ValoracionEN as va inner join va.Articulo as ar where ar.Id = :p_idArticulo]]></query>
+		</hibernate-mapping>
+	

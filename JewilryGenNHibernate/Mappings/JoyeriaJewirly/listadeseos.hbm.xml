@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="JewilryGenNHibernate"
+		                   namespace="JewilryGenNHibernate.EN.JoyeriaJewirly">
+		    
+		    
+			
+				<class name="ListaDeseosEN" table="ListaDeseos"> 
+				  	
+						<id name="Id" column="idListaDeseos" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+			
+			
+			
+		  			
+						<bag name="Articulo" table="[listaDeseos_articulo]"  >
+							<key>
+								
+									<column name="FK_idListaDeseos_idListaDeseos"/> 
+							</key>
+      						<many-to-many class="JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN">
+									<column name="FK_idArticulo_idArticulo"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+					
+							   <one-to-one name="Cliente" class="JewilryGenNHibernate.EN.JoyeriaJewirly.ClienteEN" property-ref="ListaDeseos" />							
+					 
+						
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="ListaDeseosENReadAllHQL">from ListaDeseosEN</query>
+		</hibernate-mapping>
+	

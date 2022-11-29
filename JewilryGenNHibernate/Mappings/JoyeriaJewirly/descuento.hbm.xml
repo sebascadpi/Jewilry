@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="JewilryGenNHibernate"
+		                   namespace="JewilryGenNHibernate.EN.JoyeriaJewirly">
+		    
+		    
+			
+				<class name="DescuentoEN" table="Descuento"> 
+				  	
+						<id name="Id" column="idDescuento" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Cupon" type="string"> 
+						<column name="cupon"  not-null="true"/>
+					</property>
+					<property name="Descuento" type="integer"> 
+						<column name="descuento"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+		  			
+						<bag name="Pedido" >
+							<key>
+							
+								
+								<column name="FK_idDescuento_idDescuento"/>
+					      	</key>
+							<one-to-many class="JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN"/>
+					    </bag>
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="DescuentoENReadAllHQL">from DescuentoEN</query>
+		</hibernate-mapping>
+	

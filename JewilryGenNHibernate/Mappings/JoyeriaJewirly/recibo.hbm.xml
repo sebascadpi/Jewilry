@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="JewilryGenNHibernate"
+		                   namespace="JewilryGenNHibernate.EN.JoyeriaJewirly">
+		    
+		    
+			
+				<class name="ReciboEN" table="Recibo"> 
+				  	
+						<id name="Id" column="idRecibo" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Descripcion" type="string"> 
+						<column name="descripcion"  not-null="true"/>
+					</property>
+					<property name="Codigo" type="integer"> 
+						<column name="codigo"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+		  			
+					
+							   <one-to-one name="Pedido" class="JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN" property-ref="Recibo" />							
+					 
+						
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="ReciboENReadAllHQL">from ReciboEN</query>
+		</hibernate-mapping>
+	
