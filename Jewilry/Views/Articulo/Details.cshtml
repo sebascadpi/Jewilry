@@ -7,8 +7,22 @@
 
 <h2>Details</h2>
 
+
 <div>
-    <h4>ArticuloViewModel</h4>
+    <div class="row">
+        <div class="col-lg-5">
+            <img class="card-img-top max-width: 100%" src=@Html.DisplayFor(model => model.Foto) alt="Card image cap">
+        </div>
+        <div class="col-lg-7 text-center bg-light">
+
+            <h2>@Html.DisplayFor(model => model.Nombre)</h2>
+            
+        </div>
+    </div> 
+</div>
+
+
+<div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,15 +31,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            
-            <img class="card-img-top max-width: 100%" src=@Html.DisplayFor(model => model.Foto) alt="Card image cap">
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
         </dd>
 
         <dt>

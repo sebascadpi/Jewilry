@@ -30,7 +30,6 @@ namespace Jewilry.Models
 
         [Display(Prompt = "Stock del articulo", Description = "Stock del articulo", Name = "Stock")]
         [Required(ErrorMessage = "Debe indicar un Stock para el articulo")]
-        [DataType(DataType.Currency, ErrorMessage = "El Stock debe ser un valor numerico")]
         [Range(minimum: 0, maximum: 10000, ErrorMessage = "El Stock debe ser mayor que 0 y menor que 10000")]
         public int Stock { get; set; }
 
