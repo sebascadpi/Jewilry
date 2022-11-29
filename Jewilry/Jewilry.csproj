@@ -234,6 +234,9 @@
     <Content Include="Content\Images\131073.jpg" />
     <Content Include="Content\Images\131072.jpg" />
     <Content Include="Content\Images\131074.jpg" />
+    <Content Include="Content\Images\Icon\star.png" />
+    <Content Include="Content\Images\Icon\star2.png" />
+    <Content Include="Content\Images\Icon\star3.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

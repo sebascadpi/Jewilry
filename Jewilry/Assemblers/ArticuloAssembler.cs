@@ -18,6 +18,8 @@ namespace Jewilry.Assemblers
             art.Stock = en.Stock;
             art.Foto = en.Foto;
             art.Descripcion = en.Descripcion;
+            art.ValoracionMedia = en.ValoracionMedia;
+
 
             return art;
         }

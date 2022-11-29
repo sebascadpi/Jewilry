@@ -38,5 +38,10 @@ namespace Jewilry.Models
         [Range(minimum: 0, maximum: 10000, ErrorMessage = "El Stock debe ser mayor que 0 y menor que 10000")]
         public int Stock { get; set; }
 
+        [Display(Prompt = "ValoracionMedia del articulo", Description = "ValoracionMedia del articulo", Name = "ValoracionMedia")]
+        [Required(ErrorMessage = "Debe indicar un ValoracionMedia para el articulo")]
+        [Range(minimum: 0, maximum: 10000, ErrorMessage = "El ValoracionMedia debe ser mayor que 0 y menor que 10000")]
+        public float ValoracionMedia { get; set; }
+
     }
 }

@@ -22,3 +22,60 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.commentBox {
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.starFade {
+    background-image: url('../Content/Images/Icon/star2.png');
+    min-width: 1em;
+    min-height: 1em;
+    background-repeat: no-repeat;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starFadeN {
+    background-image: url('../Content/Images/Icon/star2.png');
+    min-width: 1em;
+    background-repeat: no-repeat;
+    min-height: 1em;
+    display: inline-block;
+}
+
+.starGlow {
+    background-image: url('../Content/Images/Icon/star.png');
+    min-width: 1em;
+    background-repeat: no-repeat;
+    min-height: 1em;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starGlowN {
+    background-image: url('../Content/Images/Icon/star.png');
+    background-repeat: no-repeat;
+    min-width: 1em;
+    min-height: 1em;
+    display: inline-block;
+}
+
+.starMedia {
+    background-image: url('../Content/Images/Icon/star3.png');
+    min-width: 1em;
+    background-repeat: no-repeat;
+    min-height: 1em;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starMediaN {
+    background-image: url('../Content/Images/Icon/star3.png');
+    background-repeat: no-repeat;
+    min-width: 1em;
+    min-height: 1em;
+    display: inline-block;
+}
