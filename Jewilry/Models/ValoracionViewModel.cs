@@ -20,7 +20,6 @@ namespace Jewilry.Models
 
         [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Valor")]
         [Required(ErrorMessage = "Debe indicar un Valor para el articulo")]
-        [StringLength(maximumLength: 200, ErrorMessage = "El Valor no puede tener mas de 200 caracteres")]
         public int Valor { get; set; }
 
         [Display(Prompt = "Articulo del articulo", Description = "Articulo del articulo", Name = "Articulo")]

@@ -320,6 +320,7 @@
     <Content Include="Views\Articulo\Details.cshtml" />
     <Content Include="Views\Valoracion\Index.cshtml" />
     <Content Include="Views\Shared\Valoraciones.cshtml" />
+    <Content Include="Views\Valoracion\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

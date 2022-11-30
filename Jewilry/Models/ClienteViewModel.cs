@@ -16,6 +16,10 @@ namespace Jewilry.Models
         public string Nombre { get; set; }
 
         [Required]
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
+        [Required]
         [Display(Name = "Apellidos")]
         public string Apellidos { get; set; }
 

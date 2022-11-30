@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Jewilry.Models;
 using JewilryGenNHibernate.CEN.JoyeriaJewirly;
+using System.Collections.Generic;
+using JewilryGenNHibernate.EN.JoyeriaJewirly;
 
 namespace Jewilry.Controllers
 {
@@ -82,6 +84,14 @@ namespace Jewilry.Controllers
                 case SignInStatus.Success:
                     ClienteCEN cli = new ClienteCEN();
                     string token = cli.Login(model.Email, model.Password);
+
+                    IList<ClienteEN> listaUsuarios = cli.DameClientePorEmail(model.Email);
+                    if(listaUsuarios.Count > 0)
+                    {
+                        Session["Usuario"] = listaUsuarios[0];
+
+                    }
+
                     if(token != null)
                     {
                         return RedirectToLocal(returnUrl);
@@ -175,6 +185,8 @@ namespace Jewilry.Controllers
 
                     cliCEN.CrearCliente(model.Password,model.Nombre,model.Apellidos, model.Email, model.Genero, int.Parse(model.Telefono), model.Direccion);
 
+
+                    Session["Usuario"] = cliCEN.DameCliente(model.Id);
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -387,6 +399,8 @@ namespace Jewilry.Controllers
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
+
+
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);

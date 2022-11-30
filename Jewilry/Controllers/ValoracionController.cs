@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using Jewilry.Assemblers;
@@ -43,25 +44,30 @@ namespace Jewilry.Controllers
         }
 
         // GET: Valoracion/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             return View();
         }
 
         // POST: Valoracion/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int id, ValoracionViewModel val)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            ValoracionCEN valCEN = new ValoracionCEN();
 
-                return RedirectToAction("Index");
-            }
-            catch
+            int currentUserId = 0;
+
+            if (Session["Usuario"] != null)
             {
-                return View();
+                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
             }
+            System.Diagnostics.Debug.WriteLine(id + "aaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa");
+
+            System.Diagnostics.Debug.WriteLine(currentUserId + "aaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa");
+
+            valCEN.CrearValoracion(val.Comentario, val.Valor, id, currentUserId);
+
+            return RedirectToAction("Index", "Articulo");
         }
 
         // GET: Valoracion/Edit/5
@@ -128,7 +134,6 @@ namespace Jewilry.Controllers
            
 
             return PartialView("Valoraciones", listViewModel);
-            SessionClose();
         }
     }
 }
