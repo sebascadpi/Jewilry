@@ -278,7 +278,7 @@ public double CalcularMedia (int p_idArticulo)
         try
         {
                 SessionInitializeTransaction ();
-                //String sql = @"FROM ValoracionEN self where Select avg(va.Valor) FROM ValoracionEN as va inner join va.Articulo as ar where ar.Id = :p_idArticulo";
+                //String sql = @"FROM ValoracionEN self where Select CAST(AVG(va.Valor) AS DECIMAL(10,2)) FROM ValoracionEN as va inner join va.Articulo as ar where ar.Id = :p_idArticulo";
                 //IQuery query = session.CreateQuery(sql);
                 IQuery query = (IQuery)session.GetNamedQuery ("ValoracionENcalcularMediaHQL");
                 query.SetParameter ("p_idArticulo", p_idArticulo);

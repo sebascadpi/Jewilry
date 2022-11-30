@@ -186,7 +186,12 @@ namespace Jewilry.Controllers
                     cliCEN.CrearCliente(model.Password,model.Nombre,model.Apellidos, model.Email, model.Genero, int.Parse(model.Telefono), model.Direccion);
 
 
-                    Session["Usuario"] = cliCEN.DameCliente(model.Id);
+                    IList<ClienteEN> listaUsuarios = cliCEN.DameClientePorEmail(model.Email);
+                    if (listaUsuarios.Count > 0)
+                    {
+                        Session["Usuario"] = listaUsuarios[0];
+
+                    }
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

@@ -24,7 +24,6 @@ namespace Jewilry.Controllers
             ValoracionCAD artCAD = new ValoracionCAD(session);
             ValoracionCEN artCEN = new ValoracionCEN(artCAD);
 
-            ArticuloEN artEN2 = new ArticuloCAD().ReadOIDDefault(id);
 
             IList<ValoracionEN> listEN = artCEN.ValoracionArticulos(id);
 
@@ -53,21 +52,32 @@ namespace Jewilry.Controllers
         [HttpPost]
         public ActionResult Create(int id, ValoracionViewModel val)
         {
-            ValoracionCEN valCEN = new ValoracionCEN();
-
-            int currentUserId = 0;
-
-            if (Session["Usuario"] != null)
+            try
             {
-                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+                ValoracionCEN valCEN = new ValoracionCEN();
+
+                int currentUserId = 0;
+
+                if (Session["Usuario"] != null)
+                {
+                    currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+                }
+
+                System.Diagnostics.Debug.WriteLine((float)valCEN.CalcularMedia(id));
+
+                int val1 = valCEN.CrearValoracion(val.Comentario, val.Valor, id, currentUserId);
+
+                float media = (float)valCEN.CalcularMedia(id);
+
+                ArticuloCEN artCEN = new ArticuloCEN();
+                artCEN.CambiarMedia(id, media);
+
+                return RedirectToAction("Index", "Articulo");
             }
-            System.Diagnostics.Debug.WriteLine(id + "aaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa");
-
-            System.Diagnostics.Debug.WriteLine(currentUserId + "aaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa");
-
-            valCEN.CrearValoracion(val.Comentario, val.Valor, id, currentUserId);
-
-            return RedirectToAction("Index", "Articulo");
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Valoracion/Edit/5
