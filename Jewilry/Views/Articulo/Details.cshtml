@@ -30,8 +30,8 @@
             <!-- Botones de compra -->
 
             <div class="section mt-4 mb-4" style="padding-bottom:20px;padding-top:20px;">
-                
-            @Html.ActionLink("Añadir carrito", "prueba", "Tienda", new { id = @Html.DisplayFor(model => model.Id) }, new { @class = "btn btn-primary" })
+
+                @Html.ActionLink("Añadir carrito", "prueba", "Tienda", new { id = @Html.DisplayFor(model => model.Id) }, new { @class = "btn btn-primary" })
 
             </div>
         </row>
@@ -48,38 +48,15 @@
         </row>
     </div>
 
-    
+
 </div>
 
 
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
+    
+    @{ Html.RenderAction("Navigation", "Valoracion", new { id = Model.Id });}
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-
-    </dl>
 </div>
 

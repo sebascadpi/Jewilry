@@ -19,6 +19,10 @@ namespace Jewilry.Assemblers
             art.Foto = en.Foto;
             art.Descripcion = en.Descripcion;
             art.ValoracionMedia = en.ValoracionMedia;
+            art.Marca = en.Marca;
+            art.Material = en.Material;
+            art.Tallas = en.Tallas;
+
 
 
             return art;

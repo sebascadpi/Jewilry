@@ -44,5 +44,7 @@
 		  
 		  <query name="ValoracionENReadAllHQL">from ValoracionEN</query>
 		  <query name="ValoracionENcalcularMediaHQL"><![CDATA[Select avg(va.Valor) FROM ValoracionEN as va inner join va.Articulo as ar where ar.Id = :p_idArticulo]]></query>
+		<query name="ValoracionENvaloracionArticulosHQL"><![CDATA[select val FROM ValoracionEN as val inner join val.Articulo as art where art.Id = :p_Articulo]]></query>
+
 		</hibernate-mapping>
 	

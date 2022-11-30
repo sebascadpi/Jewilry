@@ -11,41 +11,44 @@ using JewilryGenNHibernate.EN.JoyeriaJewirly;
 
 namespace Jewilry.Controllers
 {
-    public class ArticuloController : BasicController
+    public class ValoracionController : BasicController
     {
-        // GET: Articulo
-        public ActionResult Index()
+        // GET: Valoracion
+        public ActionResult Index(int id)
         {
-            //ArticuloCEN artiuloCEN = new ArticuloCEN();
-            //List<ArticuloEN> lista = artiuloCEN.DameArticulos(0, 20).ToList();
-            SessionInitialize();
-            ArticuloCAD artCAD = new ArticuloCAD(session);
-            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
 
-            IList<ArticuloEN> listEN = artCEN.DameArticulos(0, -1);
-            IEnumerable<ArticuloViewModel> listViewModel = new ArticuloAssembler().ConvertListENToModel(listEN).ToList();
+            SessionInitialize();
+            
+
+            ValoracionCAD artCAD = new ValoracionCAD(session);
+            ValoracionCEN artCEN = new ValoracionCEN(artCAD);
+
+            ArticuloEN artEN2 = new ArticuloCAD().ReadOIDDefault(id);
+
+            IList<ValoracionEN> listEN = artCEN.ValoracionArticulos(id);
+
+            IEnumerable<ValoracionViewModel> listViewModel = new ValoracionAssembler().ConvertListENToModel(listEN).ToList();
             SessionClose();
 
 
             return View(listViewModel);
+
+           
         }
 
-        // GET: Articulo/Details/5
+        // GET: Valoracion/Details/5
         public ActionResult Details(int id)
         {
-            ArticuloEN artEN2 = new ArticuloCAD().ReadOIDDefault(id);
-
-            ArticuloViewModel listViewModel = new ArticuloAssembler().ConvertENToModelUI(artEN2);
-            return View(listViewModel);
+            return View();
         }
 
-        // GET: Articulo/Create
+        // GET: Valoracion/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Articulo/Create
+        // POST: Valoracion/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -61,13 +64,13 @@ namespace Jewilry.Controllers
             }
         }
 
-        // GET: Articulo/Edit/5
+        // GET: Valoracion/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Articulo/Edit/5
+        // POST: Valoracion/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -83,13 +86,13 @@ namespace Jewilry.Controllers
             }
         }
 
-        // GET: Articulo/Delete/5
+        // GET: Valoracion/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Articulo/Delete/5
+        // POST: Valoracion/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -105,6 +108,27 @@ namespace Jewilry.Controllers
             }
         }
 
-        
+        [ChildActionOnly]
+        public ActionResult Navigation(int id)
+        {
+            SessionInitialize();
+
+
+            ValoracionCAD artCAD = new ValoracionCAD(session);
+            ValoracionCEN artCEN = new ValoracionCEN(artCAD);
+
+            ArticuloEN artEN2 = new ArticuloCAD().ReadOIDDefault(id);
+
+            IList<ValoracionEN> listEN = artCEN.ValoracionArticulos(id);
+
+            IEnumerable<ValoracionViewModel> listViewModel = new ValoracionAssembler().ConvertListENToModel(listEN).ToList();
+            
+
+
+           
+
+            return PartialView("Valoraciones", listViewModel);
+            SessionClose();
+        }
     }
 }

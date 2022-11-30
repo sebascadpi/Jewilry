@@ -32,5 +32,7 @@ System.Collections.Generic.IList<ValoracionEN> DameValoraciones (int first, int 
 
 
 double CalcularMedia (int p_idArticulo);
+
+System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ValoracionEN> ValoracionArticulos(int p_Articulo);
 }
 }

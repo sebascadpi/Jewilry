@@ -303,5 +303,36 @@ public double CalcularMedia (int p_idArticulo)
 
         return result;
 }
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ValoracionEN> ValoracionArticulos(int p_Articulo)
+{
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ValoracionEN> result;
+    try
+    {
+        SessionInitializeTransaction();
+        //String sql = @"FROM ValoracionEN self where select val FROM ValoracionEN as val inner join val.Articulo as art where art.Id = :p_Articulo";
+        //IQuery query = session.CreateQuery(sql);
+        IQuery query = (IQuery)session.GetNamedQuery("ValoracionENvaloracionArticulosHQL");
+        query.SetParameter("p_Articulo", p_Articulo);
+
+        result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ValoracionEN>();
+        SessionCommit();
+    }
+
+    catch (Exception ex)
+    {
+        SessionRollBack();
+        if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+            throw ex;
+        throw new JewilryGenNHibernate.Exceptions.DataLayerException("Error in ValoracionCAD.", ex);
+    }
+
+
+    finally
+    {
+        SessionClose();
+    }
+
+    return result;
 }
+    }
 }

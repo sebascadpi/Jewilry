@@ -112,5 +112,10 @@ public double CalcularMedia (int p_idArticulo)
 {
         return _IValoracionCAD.CalcularMedia (p_idArticulo);
 }
+
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ValoracionEN> ValoracionArticulos(int p_Articulo)
+{
+    return _IValoracionCAD.ValoracionArticulos(p_Articulo);
+}
 }
 }
