@@ -121,7 +121,8 @@ public static void InitializeData ()
                 int idArt2 = artCEN.CrearArticulo (20, "collar", "Esto es un anillo", "oro", "Pandora", 10, "su foto", idCat1, "5", 5);
                 int idArt3 = artCEN.CrearArticulo (15, "reloj", "Esto es un anillo", "oro", "Pandora", 50, "su foto", idCat1, "5", 5);
 
-
+			
+			
 
                 ValoracionCEN valCEN = new ValoracionCEN ();
                 int idVal1 = valCEN.CrearValoracion ("buena cosa", 10, idArt1, idCliente);
