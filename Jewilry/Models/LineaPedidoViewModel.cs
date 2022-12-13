@@ -13,13 +13,13 @@ namespace Jewilry.Models
 
         public int Id { get; set; }
 
-        [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Valor")]
+        [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Unidades")]
         [Required(ErrorMessage = "Debe indicar un Valor para el articulo")]
         public int Unidades { get; set; }
 
-        [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Valor")]
+        [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Precio")]
         [Required(ErrorMessage = "Debe indicar un Valor para el articulo")]
-        public int Precio { get; set; }
+        public float Precio { get; set; }
 
         
 

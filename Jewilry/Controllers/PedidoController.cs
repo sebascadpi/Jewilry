@@ -39,37 +39,62 @@ namespace Jewilry.Controllers
             return View(listViewModel);
         }
 
-        // GET: Articulo/Create
-        public ActionResult Create()
+        
+        public ActionResult Create(int id, PedidoViewModel val)
         {
-            return View();
-        }
+            int currentUserId = 0;
+            bool haycarrito = false;
+            int idencontrado = 0;
+            if (Session["Usuario"] != null)
+            {
+                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+            }
 
-        // POST: Articulo/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection, int idArt1, int idPedido2)
-        {
             PedidoCEN pedCEN = new PedidoCEN();
+            IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
 
-            try
+            foreach (PedidoEN ped in listaPedidos)
             {
-
-
-                int currentUserId = 0;
-
-                if (Session["Usuario"] != null)
+                if(ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
                 {
-                    currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+                    haycarrito = true;
+                    idencontrado = ped.Id;
                 }
-
-                int idPedido = pedCEN.CrearPedido (currentUserId);
-
-                return RedirectToAction("Index", "Articulo");
             }
-            catch
+
+            if (haycarrito == false)
             {
-                return View();
+                
+                    int idPedido = pedCEN.CrearPedido(currentUserId);
+                    System.Web.HttpContext.Current.Session["NumPedido"] = idPedido;
+
+                    LineaPedidoCP linCP = new LineaPedidoCP();
+
+                    ArticuloEN artEN = new ArticuloCAD().DameArticulo(id);
+
+
+
+                    linCP.CrearLinea(id, idPedido, 1, artEN.Precio);
+
+
+                    return RedirectToAction("Details", "LineaPedido");
+                
+                
             }
+            else
+            {
+                ArticuloEN artEN = new ArticuloCAD().DameArticulo(id);
+
+                LineaPedidoCP linCP = new LineaPedidoCP();
+
+
+
+                linCP.CrearLinea(id, idencontrado, 1, artEN.Precio);
+
+                return RedirectToAction("Details", "LineaPedido");
+
+            }
+
         }
 
         // GET: Articulo/Edit/5

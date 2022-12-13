@@ -22,7 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
-
+.carrito {
+    width: 67px;
+    height: 50px;
+    padding: 0.5rem 1rem;
+}
 .commentBox {
     background-color: #efefef;
     padding: 10px;

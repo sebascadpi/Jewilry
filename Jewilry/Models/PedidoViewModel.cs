@@ -15,7 +15,6 @@ namespace Jewilry.Models
 
         [Display(Prompt = "Estado del pedido", Description = "Estado del pedido", Name = "Estado")]
         [Required(ErrorMessage = "Debe indicar un Estado para el pedido")]
-        [StringLength(maximumLength:200, ErrorMessage = "El Estado no puede tener mas de 200 caracteres")]
         public EstadoPedidoEnum Estado { get; set; }
 
         [Display(Prompt = "Fecha del pedido", Description = "Fecha del pedido", Name = "Fecha")]

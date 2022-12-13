@@ -18,28 +18,47 @@ namespace Jewilry.Controllers
         public ActionResult Index(int id)
         {
 
-            SessionInitialize();
             
 
-            ValoracionCAD artCAD = new ValoracionCAD(session);
-            ValoracionCEN artCEN = new ValoracionCEN(artCAD);
 
-
-            IList<ValoracionEN> listEN = artCEN.ValoracionArticulos(id);
-
-            IEnumerable<ValoracionViewModel> listViewModel = new ValoracionAssembler().ConvertListENToModel(listEN).ToList();
-            SessionClose();
-
-
-            return View(listViewModel);
+            return View();
 
            
         }
 
         // GET: Valoracion/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            return View();
+
+            int currentUserId = 0;
+            int idencontrado = 0;
+            if (Session["Usuario"] != null)
+            {
+                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+            }
+            PedidoCEN pedCEN = new PedidoCEN();
+            IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
+
+            foreach (PedidoEN ped in listaPedidos)
+            {
+                if (ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
+                {
+                    idencontrado = ped.Id;
+                }
+            }
+
+
+            LineaPedidoCEN artCEN = new LineaPedidoCEN();
+            IList<LineaPedidoEN> lineaarticulos = artCEN.LineasPedido(idencontrado);
+
+
+
+            IEnumerable<LineaPedidoViewModel> listViewModel = new LineaPedidoAssembler().ConvertListENToModel(lineaarticulos).ToList();
+            SessionClose();
+
+
+            return View(listViewModel);
+
         }
 
         // GET: Valoracion/Create

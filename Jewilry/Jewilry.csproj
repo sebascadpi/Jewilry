@@ -243,6 +243,7 @@
     <Content Include="Content\Images\131073.jpg" />
     <Content Include="Content\Images\131072.jpg" />
     <Content Include="Content\Images\131074.jpg" />
+    <Content Include="Content\Images\icons8-shopping-cart-642.png" />
     <Content Include="Content\Images\Icon\star.png" />
     <Content Include="Content\Images\Icon\star2.png" />
     <Content Include="Content\Images\Icon\star3.png" />
@@ -327,6 +328,7 @@
     <Content Include="Views\Valoracion\Index.cshtml" />
     <Content Include="Views\Shared\Valoraciones.cshtml" />
     <Content Include="Views\Valoracion\Create.cshtml" />
+    <Content Include="Views\LineaPedido\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

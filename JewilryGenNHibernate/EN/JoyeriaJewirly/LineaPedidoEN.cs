@@ -36,7 +36,7 @@ private int unidades;
 /**
  *	Atributo precio
  */
-private int precio;
+private float precio;
 
 
 
@@ -67,7 +67,7 @@ public virtual int Unidades {
 
 
 
-public virtual int Precio {
+public virtual float Precio {
         get { return precio; } set { precio = value;  }
 }
 
@@ -81,7 +81,7 @@ public LineaPedidoEN()
 
 
 
-public LineaPedidoEN(int id, JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN articulo, JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN pedido, int unidades, int precio
+public LineaPedidoEN(int id, JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN articulo, JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN pedido, int unidades, float precio
                      )
 {
         this.init (Id, articulo, pedido, unidades, precio);
@@ -94,7 +94,7 @@ public LineaPedidoEN(LineaPedidoEN lineaPedido)
 }
 
 private void init (int id
-                   , JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN articulo, JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN pedido, int unidades, int precio)
+                   , JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN articulo, JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN pedido, int unidades, float precio)
 {
         this.Id = id;
 

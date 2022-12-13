@@ -39,6 +39,9 @@ void TotalDescuento (int p_Pedido_OID, int p_descuento_OID);
 
 System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN> PedidosCliente (int p_idCliente);
 
+System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN> PedidosTodosCliente(int p_idCliente);
 
-}
+
+
+    }
 }

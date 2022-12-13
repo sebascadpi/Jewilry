@@ -348,5 +348,37 @@ public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.P
 
         return result;
 }
+
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN> PedidosTodosCliente(int p_idCliente)
+{
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN> result;
+    try
+    {
+        SessionInitializeTransaction();
+        //String sql = @"FROM PedidoEN self where Select ped FROM PedidoEN as ped inner join ped.Cliente as cli where cli.Id = :p_idCliente";
+        //IQuery query = session.CreateQuery(sql);
+        IQuery query = (IQuery)session.GetNamedQuery("TodosPedidoENpedidosClienteHQL");
+        query.SetParameter("p_idCliente", p_idCliente);
+
+        result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN>();
+        SessionCommit();
+    }
+
+    catch (Exception ex)
+    {
+        SessionRollBack();
+        if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+            throw ex;
+        throw new JewilryGenNHibernate.Exceptions.DataLayerException("Error in PedidoCAD.", ex);
+    }
+
+
+    finally
+    {
+        SessionClose();
+    }
+
+    return result;
 }
+    }
 }

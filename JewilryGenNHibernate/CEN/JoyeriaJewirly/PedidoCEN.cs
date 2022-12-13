@@ -84,5 +84,9 @@ public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.P
 {
         return _IPedidoCAD.PedidosCliente (p_idCliente);
 }
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.PedidoEN> PedidosTodosCliente(int p_idCliente)
+{
+    return _IPedidoCAD.PedidosTodosCliente(p_idCliente);
 }
+    }
 }

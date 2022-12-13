@@ -105,5 +105,7 @@
 		  
 		  <query name="PedidoENReadAllHQL">from PedidoEN</query>
 		  <query name="PedidoENpedidosClienteHQL"><![CDATA[Select ped FROM PedidoEN as ped inner join ped.Cliente as cli where cli.Id = :p_idCliente and ped.Estado != 1 ]]></query>
+			<query name="TodosPedidoENpedidosClienteHQL"><![CDATA[Select ped FROM PedidoEN as ped inner join ped.Cliente as cli where cli.Id = :p_idCliente ]]></query>
+
 		</hibernate-mapping>
 	

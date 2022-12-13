@@ -15,7 +15,7 @@
 					<property name="Unidades" type="integer"> 
 						<column name="unidades"  not-null="true"/>
 					</property>
-					<property name="Precio" type="integer"> 
+					<property name="Precio" type="float"> 
 						<column name="precio"  not-null="true"/>
 					</property>
 			

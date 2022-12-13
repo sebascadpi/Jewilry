@@ -21,7 +21,7 @@ namespace JewilryGenNHibernate.CP.JoyeriaJewirly
 {
 public partial class LineaPedidoCP : BasicCP
 {
-public JewilryGenNHibernate.EN.JoyeriaJewirly.LineaPedidoEN CrearLinea (int p_articulo, int p_pedido, int p_unidades, int p_precio)
+public JewilryGenNHibernate.EN.JoyeriaJewirly.LineaPedidoEN CrearLinea (int p_articulo, int p_pedido, int p_unidades, float p_precio)
 {
         /*PROTECTED REGION ID(JewilryGenNHibernate.CP.JoyeriaJewirly_LineaPedido_crearLinea) ENABLED START*/
 

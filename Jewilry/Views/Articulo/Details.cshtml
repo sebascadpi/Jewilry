@@ -31,7 +31,8 @@
 
             <div class="section mt-4 mb-4" style="padding-bottom:20px;padding-top:20px;">
 
-                @Html.ActionLink("Añadir carrito", "prueba", "Tienda", new { id = @Html.DisplayFor(model => model.Id) }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Añadir al carrito", "Create", "Pedido", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
 
             </div>
         </row>
