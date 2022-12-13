@@ -10,15 +10,22 @@ namespace Jewilry.Models
     public class LineaPedidoViewModel
     {
         [ScaffoldColumn(false)]
-
         public int Id { get; set; }
 
-        [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Unidades")]
-        [Required(ErrorMessage = "Debe indicar un Valor para el articulo")]
+        [ScaffoldColumn(false)]
+        [Display(Prompt = "Articulo del LineaPedido", Description = "Articulo del LineaPedido", Name = "Foto")]
+        public string FotoArticulo { get; set; }
+
+        [ScaffoldColumn(false)]
+        [Display(Prompt = "Nombre del LineaPedido", Description = "Nombre del LineaPedido", Name = "Nombre")]
+        public string NombreArticulo { get; set; }
+
+        [Display(Prompt = "Valor del LineaPedido", Description = "Valor del LineaPedido", Name = "Unidades")]
+        [Required(ErrorMessage = "Debe indicar un Valor para el LineaPedido")]
         public int Unidades { get; set; }
 
-        [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Precio")]
-        [Required(ErrorMessage = "Debe indicar un Valor para el articulo")]
+        [Display(Prompt = "Valor del LineaPedido", Description = "Valor del LineaPedido", Name = "Precio")]
+        [Required(ErrorMessage = "Debe indicar un Valor para el LineaPedido")]
         public float Precio { get; set; }
 
         

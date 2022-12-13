@@ -17,18 +17,13 @@ namespace Jewilry.Controllers
         // GET: Valoracion
         public ActionResult Index(int id)
         {
-
-            
-
-
-            return View();
-
-           
+            return View();    
         }
 
         // GET: Valoracion/Details/5
         public ActionResult Details()
         {
+            SessionInitialize();
 
             int currentUserId = 0;
             int idencontrado = 0;
@@ -44,18 +39,38 @@ namespace Jewilry.Controllers
                 if (ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
                 {
                     idencontrado = ped.Id;
+                    
                 }
             }
 
+            ArticuloCAD artCAD = new ArticuloCAD(session);
+            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
 
-            LineaPedidoCEN artCEN = new LineaPedidoCEN();
-            IList<LineaPedidoEN> lineaarticulos = artCEN.LineasPedido(idencontrado);
+            IList<ArticuloEN> listaArticulos = artCEN.ArticuloPedido(idencontrado);
+            IList<SelectListItem> articulosItems = new List<SelectListItem>();
+            foreach(ArticuloEN art in listaArticulos)
+            {
+                articulosItems.Add(new SelectListItem { Text = art.Nombre, Value = art.Foto});
+            }
+
+            ViewData["FotosArticulo"] = articulosItems;
+
+            foreach (ArticuloEN art in listaArticulos)
+            {
+                articulosItems.Add(new SelectListItem { Text = art.Nombre, Value = art.Nombre });
+
+            }
+
+            ViewData["NombreArticulo"] = articulosItems;
+
+
+            LineaPedidoCAD linPedCAD = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linPedCAD);
+            IList<LineaPedidoEN> lineaarticulos = linpedCEN.LineasPedido(idencontrado);
 
 
 
             IEnumerable<LineaPedidoViewModel> listViewModel = new LineaPedidoAssembler().ConvertListENToModel(lineaarticulos).ToList();
-            SessionClose();
-
 
             return View(listViewModel);
 

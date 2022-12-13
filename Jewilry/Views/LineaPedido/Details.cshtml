@@ -5,7 +5,13 @@
 </p>
 <table class="table">
     <tr>
-        
+
+        <th>
+            @Html.DisplayNameFor(model => model.FotoArticulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreArticulo)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Unidades)
         </th>
@@ -16,19 +22,26 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Unidades)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        <img style="max-width:20%;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.FotoArticulo)" />
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombreArticulo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Unidades)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Precio)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
 }
 
 </table>
