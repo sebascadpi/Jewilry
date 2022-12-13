@@ -16,11 +16,11 @@
                 @using (Html.BeginForm("Index", "Tienda", FormMethod.Get))
                 {
                     <li class="nav-item">@Html.ActionLink("Todos", "Index", new { id = "" }, new { @class = "nav-link" })</li>
-                   
+
                     <li class="nav-item"> @Html.TextBox("strCadenaBusqueda", ViewBag.BusquedaActual as string, new { @class = "form-control", placeholder = "Buscar" })</li>
 
 
-        <li class="nav-item"> <input type="submit" value="Buscar y/o filtrar" class="btn btn-inicio nav-link" /></li>
+                    <li class="nav-item"> <input type="submit" value="Buscar y/o filtrar" class="btn btn-inicio nav-link" /></li>
                 }
 
 
