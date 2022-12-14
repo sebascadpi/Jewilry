@@ -20,6 +20,10 @@ namespace Jewilry.Models
         [Display(Prompt = "Nombre del LineaPedido", Description = "Nombre del LineaPedido", Name = "Nombre")]
         public string NombreArticulo { get; set; }
 
+        [ScaffoldColumn(false)]
+        [Display(Prompt = "Nombre del LineaPedido", Description = "Nombre del LineaPedido", Name = "Nombre")]
+        public float TotalPedido { get; set; }
+
         [Display(Prompt = "Valor del LineaPedido", Description = "Valor del LineaPedido", Name = "Unidades")]
         [Required(ErrorMessage = "Debe indicar un Valor para el LineaPedido")]
         public int Unidades { get; set; }

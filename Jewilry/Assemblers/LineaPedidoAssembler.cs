@@ -21,6 +21,8 @@ namespace Jewilry.Assemblers
             art.FotoArticulo = en.Articulo.Foto;
 
             art.NombreArticulo = en.Articulo.Nombre;
+            art.TotalPedido = en.Pedido.Total;
+
 
 
 

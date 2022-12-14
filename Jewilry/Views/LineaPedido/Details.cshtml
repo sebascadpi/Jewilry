@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Jewilry.Models.LineaPedidoViewModel>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
 
@@ -21,27 +19,45 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        <img style="max-width:20%;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.FotoArticulo)" />
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img style="max-width:20%;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.FotoArticulo)" />
 
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NombreArticulo)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Unidades)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Precio)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    </td>
-</tr>
-}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreArticulo)
+            </td>
+            <td>
+                <input type="button" value="-" class="btn btn-light" onclick="location.href='@Url.Action("Menos", "LineaPedido", new { id = item.Id })'" />
+                @Html.DisplayFor(modelItem => item.Unidades)
+                <input type="button" value="+" class="btn btn-light" onclick="location.href='@Url.Action("Cantidad", "LineaPedido", new { id = item.Id })'" />
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "text-decoration-none text-secondary" })
+            </td>
+        </tr>
+    }
+    <tfoot>
+        
+            <tr>
+                <td colspan="4"></td>
+                <td>
+                    <div >
+                        Total: @Session["total"]
+                    </div>
+                </td>
+            </tr>
+        
+    </tfoot>
+
 
 </table>
+<input type="button" data-toggle="modal" data-target="#exampleModalCenter" value="Confirmar" class="btn btn-primary" />
+

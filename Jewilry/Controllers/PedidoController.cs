@@ -83,13 +83,67 @@ namespace Jewilry.Controllers
             }
             else
             {
+                int idArtEncontrado = 0;
+                int idLinPedEncontrado = 0;
+                bool repetido = false;
                 ArticuloEN artEN = new ArticuloCAD().DameArticulo(id);
 
                 LineaPedidoCP linCP = new LineaPedidoCP();
 
 
+                ArticuloCEN artCEN = new ArticuloCEN();
+                IList<ArticuloEN> listaArticulos = artCEN.ArticuloPedido(idencontrado);
 
-                linCP.CrearLinea(id, idencontrado, 1, artEN.Precio);
+                foreach (ArticuloEN art in listaArticulos)
+                {
+                    if (art.Id == id)
+                    {
+                        idArtEncontrado = art.Id;
+                        repetido = true;
+                    }
+                }
+
+                if(repetido == true)
+                {
+                    int cantidad = 0;
+                    int idPedido = 0;
+                    float precio = 0;
+
+                    LineaPedidoEN linpedPrinEN = new LineaPedidoEN();
+                    LineaPedidoCEN linpedCEN = new LineaPedidoCEN();
+                    IList<LineaPedidoEN> lineaarticulos = linpedCEN.LineasPedido(idencontrado);
+
+                    foreach (LineaPedidoEN linped in lineaarticulos)
+                    {
+                        if (linped.Articulo.Id == idArtEncontrado)
+                        {
+                            idLinPedEncontrado = linped.Id;
+                            cantidad = linped.Unidades + 1;
+                            precio = linped.Precio;
+                            idPedido = linped.Pedido.Id;
+                        }
+                    }
+
+                    linpedCEN.ModificarLinea(idLinPedEncontrado, cantidad, precio);
+
+
+                    LineaPedidoEN lineaPedidoEN = linpedCEN.DameLinea(idLinPedEncontrado);
+
+                    PedidoCAD pedidoCAD = new PedidoCAD();
+                    PedidoCEN pedidoCEN = new PedidoCEN(pedidoCAD);
+
+                    PedidoEN pedidoEN = pedidoCEN.DamePedido(idPedido);
+
+                    pedidoEN.Total += lineaPedidoEN.Precio ;
+
+                    pedidoCAD.ModifyDefault(pedidoEN);
+
+                }
+                else
+                {
+                    linCP.CrearLinea(id, idencontrado, 1, artEN.Precio);
+
+                }
 
                 return RedirectToAction("Details", "LineaPedido");
 

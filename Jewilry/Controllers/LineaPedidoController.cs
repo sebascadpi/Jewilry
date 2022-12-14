@@ -72,8 +72,100 @@ namespace Jewilry.Controllers
 
             IEnumerable<LineaPedidoViewModel> listViewModel = new LineaPedidoAssembler().ConvertListENToModel(lineaarticulos).ToList();
 
+            float x = 0;
+            foreach (var item in lineaarticulos)
+            {
+                x += (item.Unidades * item.Precio);
+            }
+
+            Session["total"] = x;
+
             return View(listViewModel);
 
+        }
+
+        public ActionResult Cantidad(int id)
+        {
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN();
+            LineaPedidoEN lineaarticulo = linpedCEN.DameLinea(id);
+
+            int idencontrado = 0;
+            int cantidad = lineaarticulo.Unidades + 1;
+            float precio = lineaarticulo.Precio;
+            int currentUserId = 0;
+            if (Session["Usuario"] != null)
+            {
+                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+            }
+
+            linpedCEN.ModificarLinea(id, cantidad, precio);
+
+            PedidoCEN pedCEN = new PedidoCEN();
+            IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
+
+            foreach (PedidoEN ped in listaPedidos)
+            {
+                if (ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
+                {
+                    idencontrado = ped.Id;
+
+                }
+            }
+
+            PedidoCAD pedidoCAD = new PedidoCAD();
+            PedidoCEN pedidoCEN = new PedidoCEN(pedidoCAD);
+
+            PedidoEN pedidoEN = pedidoCEN.DamePedido(idencontrado);
+
+            pedidoEN.Total += lineaarticulo.Precio;
+
+            pedidoCAD.ModifyDefault(pedidoEN);
+
+
+            return RedirectToAction("Details");
+        }
+        public ActionResult Menos(int id)
+        {
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN();
+            LineaPedidoEN lineaarticulo = linpedCEN.DameLinea(id);
+
+            if (lineaarticulo.Unidades > 1)
+            {
+                int idencontrado = 0;
+                int cantidad = lineaarticulo.Unidades - 1;
+                float precio = lineaarticulo.Precio;
+                int currentUserId = 0;
+                if (Session["Usuario"] != null)
+                {
+                    currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+                }
+
+                linpedCEN.ModificarLinea(id, cantidad, precio);
+
+                PedidoCEN pedCEN = new PedidoCEN();
+                IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
+
+                foreach (PedidoEN ped in listaPedidos)
+                {
+                    if (ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
+                    {
+                        idencontrado = ped.Id;
+
+                    }
+                }
+
+                PedidoCAD pedidoCAD = new PedidoCAD();
+                PedidoCEN pedidoCEN = new PedidoCEN(pedidoCAD);
+
+                PedidoEN pedidoEN = pedidoCEN.DamePedido(idencontrado);
+
+                pedidoEN.Total -= lineaarticulo.Precio;
+
+                pedidoCAD.ModifyDefault(pedidoEN);
+
+            }
+            
+            return RedirectToAction("Details");
         }
 
         // GET: Valoracion/Create
@@ -136,21 +228,49 @@ namespace Jewilry.Controllers
             }
         }
 
-        // GET: Valoracion/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Valoracion/Delete/5
-        [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                LineaPedidoCEN linpedCEN = new LineaPedidoCEN();
+                linpedCEN.BorrarLinea(id);
+                int currentUserId = 0;
+                int idencontrado = 0;
+                if (Session["Usuario"] != null)
+                {
+                    currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+                }
+                PedidoCEN pedCEN = new PedidoCEN();
+                IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
 
-                return RedirectToAction("Index");
+                foreach (PedidoEN ped in listaPedidos)
+                {
+                    if (ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
+                    {
+                        idencontrado = ped.Id;
+
+                    }
+                }
+                IList<LineaPedidoEN> lineaarticulos = linpedCEN.LineasPedido(idencontrado);
+
+                float x = 0;
+                foreach (var item in lineaarticulos)
+                {
+                    x += (item.Unidades * item.Precio);
+                }
+
+                Session["total"] = x;
+
+                PedidoCAD pedidoCAD = new PedidoCAD();
+                PedidoCEN pedidoCEN = new PedidoCEN(pedidoCAD);
+
+                PedidoEN pedidoEN = pedidoCEN.DamePedido(idencontrado);
+
+                pedidoEN.Total = x;
+
+                pedidoCAD.ModifyDefault(pedidoEN);
+
+                return RedirectToAction("Details");
             }
             catch
             {
