@@ -45,19 +45,21 @@
         </tr>
     }
     <tfoot>
-        
-            <tr>
-                <td colspan="4"></td>
-                <td>
-                    <div >
-                        Total: @Session["total"]
-                    </div>
-                </td>
-            </tr>
-        
+
+        <tr>
+            <td colspan="4"></td>
+            <td>
+                <div>
+                    Total: @Session["total"]
+                </div>
+            </td>
+        </tr>
+
     </tfoot>
 
 
 </table>
+@Html.ActionLink("Tramitar", "ResumenPedido", "Pedido", null, new { @class = "btn btn-primary" })
+
 <input type="button" data-toggle="modal" data-target="#exampleModalCenter" value="Confirmar" class="btn btn-primary" />
 

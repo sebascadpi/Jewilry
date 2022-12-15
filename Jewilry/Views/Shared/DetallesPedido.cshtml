@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Jewilry.Models.LineaPedidoViewModel>
+
+<div class="">
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FotoArticulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreArticulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unidades)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img style="max-width:20%;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.FotoArticulo)" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreArticulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unidades)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+
+            </tr>
+        }
+
+
+    </table>
+
+</div>

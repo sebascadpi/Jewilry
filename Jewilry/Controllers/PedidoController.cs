@@ -39,7 +39,41 @@ namespace Jewilry.Controllers
             return View(listViewModel);
         }
 
-        
+        public ActionResult ResumenPedido()
+        {
+
+            //ArticuloCEN artiuloCEN = new ArticuloCEN();
+            //List<ArticuloEN> lista = artiuloCEN.DameArticulos(0, 20).ToList();
+
+            int idencontrado = 0;
+
+            int currentUserId = 0;
+            if (Session["Usuario"] != null)
+            {
+                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+            }
+
+            PedidoCEN pedCEN = new PedidoCEN();
+            IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
+
+            foreach (PedidoEN ped in listaPedidos)
+            {
+                if (ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
+                {
+                    idencontrado = ped.Id;
+
+                }
+            }
+
+
+            PedidoEN pedidoEN = new PedidoCAD().ReadOIDDefault(idencontrado);
+
+            PedidoViewModel listViewModel = new PedidoAssembler().ConvertENToModelUI(pedidoEN);
+            return View(listViewModel);
+
+
+        }
+
         public ActionResult Create(int id, PedidoViewModel val)
         {
             int currentUserId = 0;

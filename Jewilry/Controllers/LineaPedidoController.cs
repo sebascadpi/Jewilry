@@ -279,25 +279,62 @@ namespace Jewilry.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult Navigation(int id)
+        public ActionResult Navigation()
         {
             SessionInitialize();
 
+            int currentUserId = 0;
+            int idencontrado = 0;
+            if (Session["Usuario"] != null)
+            {
+                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+            }
+            PedidoCEN pedCEN = new PedidoCEN();
+            IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
 
-            ValoracionCAD artCAD = new ValoracionCAD(session);
-            ValoracionCEN artCEN = new ValoracionCEN(artCAD);
+            foreach (PedidoEN ped in listaPedidos)
+            {
+                if (ped.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
+                {
+                    idencontrado = ped.Id;
 
-            ArticuloEN artEN2 = new ArticuloCAD().ReadOIDDefault(id);
+                }
+            }
 
-            IList<ValoracionEN> listEN = artCEN.ValoracionArticulos(id);
+            ArticuloCAD artCAD = new ArticuloCAD(session);
+            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
 
-            IEnumerable<ValoracionViewModel> listViewModel = new ValoracionAssembler().ConvertListENToModel(listEN).ToList();
-            
+            IList<ArticuloEN> listaArticulos = artCEN.ArticuloPedido(idencontrado);
+            IList<SelectListItem> articulosItems = new List<SelectListItem>();
+            foreach (ArticuloEN art in listaArticulos)
+            {
+                articulosItems.Add(new SelectListItem { Text = art.Nombre, Value = art.Foto });
+            }
+
+            ViewData["FotosArticulo"] = articulosItems;
+
+            foreach (ArticuloEN art in listaArticulos)
+            {
+                articulosItems.Add(new SelectListItem { Text = art.Nombre, Value = art.Nombre });
+
+            }
+
+            ViewData["NombreArticulo"] = articulosItems;
 
 
-           
+            LineaPedidoCAD linPedCAD = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linPedCAD);
+            IList<LineaPedidoEN> lineaarticulos = linpedCEN.LineasPedido(idencontrado);
 
-            return PartialView("Valoraciones", listViewModel);
+
+
+            IEnumerable<LineaPedidoViewModel> listViewModel = new LineaPedidoAssembler().ConvertListENToModel(lineaarticulos).ToList();
+
+
+
+
+
+            return PartialView("DetallesPedido", listViewModel);
         }
     }
 }
