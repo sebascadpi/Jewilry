@@ -1,7 +1,7 @@
 # Jewilry
 Trabajo DSM
 
-Está Realizado:
+Está Realizado:__
   -Mostrar articulos en la sección articulos
   -Mostrar los detalles de cada articulo
   -Mostrar las valoraciones de los articulos
