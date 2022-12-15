@@ -329,6 +329,7 @@
     <Content Include="Views\Shared\Valoraciones.cshtml" />
     <Content Include="Views\Valoracion\Create.cshtml" />
     <Content Include="Views\LineaPedido\Details.cshtml" />
+    <Content Include="Views\Shared\Articulos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
