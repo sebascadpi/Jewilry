@@ -10,7 +10,7 @@ Trabajo DSM
   
 ### Falta por realizar:
   - Añadir productos a la lista de deseos y luego mostrarla
-  - Filtrar los productos por categorias o más metodos
+  - Filtrar los productos por categorias o más metodos (En el ejemplo que hay en Moodle PetShopMVC hay un ejemplo)
   - Añadir al index una lista de productos/productos en oferta o algo
   - Realizar el estilo de la Aplicación
   - Realizar pedidos y consultarlos (Encargado Nacho)
