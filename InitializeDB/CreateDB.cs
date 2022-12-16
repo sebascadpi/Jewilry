@@ -89,8 +89,7 @@ public static void InitializeData ()
                 int idCliente = cliCEN.CrearCliente ("12345", "Paco", "Sanchez", "paco@paco.es", GeneroEnum.hombre, 648558485, "Su calle");
                 int idCliente2 = cliCEN.CrearCliente ("12345", "Javier", "Sanchez", "paco@paco.es", GeneroEnum.hombre, 648558485, "Su calle");
 
-                if (cliCEN.Login (idCliente, "12345") != null)
-                        Console.WriteLine ("El login es correcto");
+                
 
                 PedidoCEN pedCEN = new PedidoCEN ();
                 int idPedido = pedCEN.CrearPedido (idCliente);

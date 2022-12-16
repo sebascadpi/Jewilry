@@ -26,8 +26,7 @@ public void CambiarPago (int p_oid, string nuevoPago, string nuevaTarjeta, long 
         PedidoEN en = _IPedidoCAD.DamePedido (p_oid);
 
         //Condiciones
-        if (nuevoPago.Equals (en.TipoPago))
-                throw new ModelException ("El método de pago nuevo es igual al anterior.");
+        
 
         if (String.IsNullOrEmpty (nuevoPago))
                 throw new ModelException ("No se ha encontrado método de pago.");
@@ -43,7 +42,8 @@ public void CambiarPago (int p_oid, string nuevoPago, string nuevaTarjeta, long 
         en.TipoTarjeta = nuevaTarjeta;
         en.NumeroTarjeta = nuevoNumero;
 
-        _IPedidoCAD.ModifyDefault (en);
+
+            _IPedidoCAD.ModifyDefault (en);
 
         /*PROTECTED REGION END*/
 }

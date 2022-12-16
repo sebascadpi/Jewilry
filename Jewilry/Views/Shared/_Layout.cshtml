@@ -28,7 +28,8 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                    <li class="nav-item">@Html.ActionLink("Carrito", "Details", "LineaPedido", new { area = "" }, new { @class = "nav-link link-light" })</li>
+                        <li class="nav-item">@Html.ActionLink("Pedidos", "MostrarPedidos", "Pedido", new { area = "" }, new { @class = "nav-link link-light" })</li>
+                        <li class="nav-item">@Html.ActionLink("Carrito", "Details", "LineaPedido", new { area = "" }, new { @class = "nav-link link-light" })</li>
                     }
 
                 </ul>

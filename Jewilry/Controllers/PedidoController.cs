@@ -48,6 +48,8 @@ namespace Jewilry.Controllers
             int idencontrado = 0;
 
             int currentUserId = 0;
+            int contador = 0;
+
             if (Session["Usuario"] != null)
             {
                 currentUserId = ((ClienteEN)Session["Usuario"]).Id;
@@ -64,14 +66,177 @@ namespace Jewilry.Controllers
 
                 }
             }
+            LineaPedidoCAD linPedCAD2 = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN2 = new LineaPedidoCEN(linPedCAD2);
+            IList<LineaPedidoEN> lineaarticulos2 = linpedCEN2.LineasPedido(idencontrado);
+            foreach (var item in lineaarticulos2)
+            {
+
+                contador++;
 
 
-            PedidoEN pedidoEN = new PedidoCAD().ReadOIDDefault(idencontrado);
+            }
+            if (contador != 0) {
+                
 
-            PedidoViewModel listViewModel = new PedidoAssembler().ConvertENToModelUI(pedidoEN);
+                if (Session["totaldesc"] != null)
+                {
+                    float x = 0;
+
+                    float desc = float.Parse(Session["desc"].ToString());
+                    float total = float.Parse(Session["total"].ToString());
+                    LineaPedidoCAD linPedCAD = new LineaPedidoCAD(session);
+                    LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linPedCAD);
+                    IList<LineaPedidoEN> lineaarticulos = linpedCEN.LineasPedido(idencontrado);
+                    foreach (var item in lineaarticulos)
+                    {
+
+                        x += (item.Unidades * item.Precio);
+
+
+                    }
+                    float y = x * desc;
+                    Session["totaldesc"] = total - y;
+                }
+
+
+                PedidoEN pedidoEN = new PedidoCAD().ReadOIDDefault(idencontrado);
+
+                PedidoViewModel listViewModel = new PedidoAssembler().ConvertENToModelUI(pedidoEN);
+                return View(listViewModel);
+            }
+            return RedirectToAction("Details", "LineaPedido");
+
+        }
+        [HttpPost]
+        public ActionResult ResumenPedido(PedidoViewModel ped)
+        {
+            if (ModelState.IsValid) { 
+                int idencontrado = 0;
+                int iddescuento = 0;
+                int currentUserId = 0;
+                if (Session["Usuario"] != null)
+                {
+                    currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+                }
+
+                PedidoCEN pedCEN = new PedidoCEN();
+                IList<PedidoEN> listaPedidos = pedCEN.PedidosTodosCliente(currentUserId);
+
+                foreach (PedidoEN pedi in listaPedidos)
+                {
+                    if (pedi.Estado == JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.carrito)
+                    {
+                        idencontrado = pedi.Id;
+
+                    }
+                }
+
+                PedidoCAD pedidoCAD = new PedidoCAD();
+                PedidoCEN pedidoCEN = new PedidoCEN(pedidoCAD);
+
+                PedidoEN pedidoEN = pedidoCEN.DamePedido(idencontrado);
+
+                if(ped.Localidad != null && ped.Direccion != null && ped.CodigoPostal != null && ped.Provincia != null)
+                {
+                    pedidoEN.Localidad = ped.Localidad;
+                    pedidoEN.Direccion = ped.Direccion;
+                    pedidoEN.CodigoPostal = ped.CodigoPostal;
+                    pedidoEN.Provincia = ped.Provincia;
+                    pedidoCAD.ModifyDefault(pedidoEN);
+
+                }
+
+
+                DescuentoCEN descCEN = new DescuentoCEN();
+                IList<DescuentoEN> listaDescuentos = descCEN.DameDescuentos(1,-1);
+
+
+                
+                pedidoCEN.CambiarPago(idencontrado, ped.TipoPago, ped.TipoTarjeta, ped.NumeroTarjeta);
+                
+
+                if (Session["ValDesc"] != null)
+                {
+                    foreach (DescuentoEN desc in listaDescuentos)
+                    {
+                        if (desc.Cupon == Session["nomDesc"].ToString())
+                        {
+                            iddescuento = desc.Id;
+
+                        }
+                    }
+                    DescuentoEN descEN = descCEN.DameDescuento(iddescuento);
+                    pedidoCEN.AplicarDescuento(idencontrado, descEN);
+
+                }
+
+                pedidoCEN.RealizarPedido(idencontrado);
+                Session["HayPedido"] = null;
+
+                return RedirectToAction("Index", "Home");
+            }
+            return View("ResumenPedido");
+        }
+        public ActionResult MostrarPedidos()
+        {
+            SessionInitialize();
+            int currentUserId = 0;
+            if (Session["Usuario"] != null)
+            {
+                currentUserId = ((ClienteEN)Session["Usuario"]).Id;
+            }
+
+            PedidoCAD pedCAD = new PedidoCAD(session);
+            PedidoCEN pedCEN = new PedidoCEN(pedCAD);
+
+            IList<PedidoEN> listEN = pedCEN.PedidosCliente(currentUserId);
+            IEnumerable<PedidoViewModel> listViewModel = new PedidoAssembler().ConvertListENToModel(listEN).ToList();
+            SessionClose();
+
+
             return View(listViewModel);
+        }
+        public ActionResult Descuento(string codigo)
+        {
 
+            int idencontrado = 0;
 
+            DescuentoCEN descCEN = new DescuentoCEN();
+            IList<DescuentoEN> listaDescuentos = descCEN.DameDescuentos(1,-1);
+
+            foreach (DescuentoEN desc in listaDescuentos)
+            {
+                if (desc.Cupon == codigo)
+                {
+                    idencontrado = desc.Id;
+
+                }
+            }
+
+            if (idencontrado == 0)
+            {
+                Session["ValDesc"] = "Descuento no valido";
+                Session["totaldesc"] = null;
+            }
+            else
+            {
+                DescuentoEN descuentoEN = new DescuentoCAD().ReadOIDDefault(idencontrado);
+                float precio = Convert.ToInt32(Session["total"]);
+                Session["totaldesc"] = 0;
+                Session["desc"] = descuentoEN.Descuento * 0.01;
+                Session["nomDesc"] = codigo;
+                Session["ValDesc"] = "Descuento aplicado";
+            }
+
+            return RedirectToAction("ResumenPedido");
+        }
+        public ActionResult Cancelar()
+        {
+            Session["totaldesc"] = null;
+            Session["ValDesc"] = null;
+            Session["nomDesc"] = null;
+            return RedirectToAction("ResumenPedido");
         }
 
         public ActionResult Create(int id, PedidoViewModel val)
@@ -107,9 +272,9 @@ namespace Jewilry.Controllers
                     ArticuloEN artEN = new ArticuloCAD().DameArticulo(id);
 
 
+                    System.Web.HttpContext.Current.Session["HayPedido"] = "hay";
 
                     linCP.CrearLinea(id, idPedido, 1, artEN.Precio);
-
 
                     return RedirectToAction("Details", "LineaPedido");
                 

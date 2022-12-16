@@ -330,6 +330,9 @@
     <Content Include="Views\Valoracion\Create.cshtml" />
     <Content Include="Views\LineaPedido\Details.cshtml" />
     <Content Include="Views\Shared\Articulos.cshtml" />
+    <Content Include="Views\Shared\DetallesPedido.cshtml" />
+    <Content Include="Views\Pedido\ResumenPedido.cshtml" />
+    <Content Include="Views\Pedido\MostrarPedidos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,8 +30,12 @@ public void RealizarPedido (int p_oid)
         if (!(en.Estado == EstadoPedidoEnum.carrito))
                 throw new ModelException ("El pedido no se puede realizar");
 
+        DateTime fecha = DateTime.Now;
+            System.Diagnostics.Debug.WriteLine(fecha);
         en.Estado = EstadoPedidoEnum.pendiente;
-        _IPedidoCAD.ModificarPedido (en);
+        en.Fecha = fecha;
+
+            _IPedidoCAD.ModifyDefault (en);
 
 
         /*PROTECTED REGION END*/

@@ -21,20 +21,24 @@ public partial class PedidoCEN
 {
 public void AplicarDescuento (int p_oid, JewilryGenNHibernate.EN.JoyeriaJewirly.DescuentoEN descuento)
 {
-        /*PROTECTED REGION ID(JewilryGenNHibernate.CEN.JoyeriaJewirly_Pedido_aplicarDescuento) ENABLED START*/
+            /*PROTECTED REGION ID(JewilryGenNHibernate.CEN.JoyeriaJewirly_Pedido_aplicarDescuento) ENABLED START*/
 
-        PedidoEN en = _IPedidoCAD.DamePedido (p_oid);
+            PedidoEN en = _IPedidoCAD.DamePedido(p_oid);
 
-        //el int pasado por parametro lo consideramos porcentaje
-        if (descuento.Descuento > 0 && descuento.Descuento < 100) {
-                en.Total = en.Total - en.Total * (descuento.Descuento / 100);
-        }
-        else{
+            //el int pasado por parametro lo consideramos porcentaje
+            if (descuento.Descuento > 0 && descuento.Descuento < 100) {
+                System.Diagnostics.Debug.WriteLine(en.Total);
+
+                en.Total = float.Parse(en.Total.ToString()) - float.Parse(en.Total.ToString()) * (float.Parse(descuento.Descuento.ToString()) / 100);
+
+            }
+            else
+            {
                 throw new ModelException ("El cupón no es válido");
-        }
+            }
+            _IPedidoCAD.ModifyDefault(en);
 
-        _IPedidoCAD.ModificarPedido (en);
-        /*PROTECTED REGION END*/
-}
-}
+            /*PROTECTED REGION END*/
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Jewilry.Models.LineaPedidoViewModel>
 
 <div class="">
+
     <table class="table">
         <tr>
 
@@ -34,13 +35,42 @@
 
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Precio)
+                    @Html.DisplayFor(modelItem => item.Precio)€
                 </td>
 
             </tr>
         }
+    <tfoot>
 
+        @if (Session["totaldesc"] == null)
+        {
+            <tr>
+
+                <td colspan="2"></td>
+
+                <td class="text-right">
+                    Total: @Session["total"]€
+                </td>
+
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="2"></td>
+                <td >
+                    <div style="text-decoration:line-through;">
+                        Total: @Session["total"]€
+                    </div>
+                    Total: @Convert.ToDouble(Session["totaldesc"])€
+                </td>
+            </tr>
+
+        }
+
+    </tfoot>
 
     </table>
+
 
 </div>
