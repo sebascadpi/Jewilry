@@ -39,6 +39,22 @@ namespace Jewilry.Controllers
             return View(listViewModel);
         }
 
+        public ActionResult DetallesPedido(int id)
+        {
+            LineaPedidoCAD linPedCAD2 = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN2 = new LineaPedidoCEN(linPedCAD2);
+            
+
+
+                
+
+
+            PedidoEN pedidoEN = new PedidoCAD().ReadOIDDefault(id);
+
+            PedidoViewModel listViewModel = new PedidoAssembler().ConvertENToModelUI(pedidoEN);
+            return View(listViewModel);
+        }
+
         public ActionResult ResumenPedido()
         {
 
@@ -218,6 +234,8 @@ namespace Jewilry.Controllers
             {
                 Session["ValDesc"] = "Descuento no valido";
                 Session["totaldesc"] = null;
+                Session["ValDesc"] = null;
+                Session["nomDesc"] = null;
             }
             else
             {

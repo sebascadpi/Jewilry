@@ -336,5 +336,48 @@ namespace Jewilry.Controllers
 
             return PartialView("DetallesPedido", listViewModel);
         }
+
+        [ChildActionOnly]
+        public ActionResult NavigationPedido(int id)
+        {
+            SessionInitialize();
+
+
+
+            ArticuloCAD artCAD = new ArticuloCAD(session);
+            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
+
+            IList<ArticuloEN> listaArticulos = artCEN.ArticuloPedido(id);
+            IList<SelectListItem> articulosItems = new List<SelectListItem>();
+            foreach (ArticuloEN art in listaArticulos)
+            {
+                articulosItems.Add(new SelectListItem { Text = art.Nombre, Value = art.Foto });
+            }
+
+            ViewData["FotosArticulo"] = articulosItems;
+
+            foreach (ArticuloEN art in listaArticulos)
+            {
+                articulosItems.Add(new SelectListItem { Text = art.Nombre, Value = art.Nombre });
+
+            }
+
+            ViewData["NombreArticulo"] = articulosItems;
+
+
+            LineaPedidoCAD linPedCAD = new LineaPedidoCAD(session);
+            LineaPedidoCEN linpedCEN = new LineaPedidoCEN(linPedCAD);
+            IList<LineaPedidoEN> lineaarticulos = linpedCEN.LineasPedido(id);
+
+
+
+            IEnumerable<LineaPedidoViewModel> listViewModel = new LineaPedidoAssembler().ConvertListENToModel(lineaarticulos).ToList();
+
+
+
+
+
+            return PartialView("DetallesPedido", listViewModel);
+        }
     }
 }

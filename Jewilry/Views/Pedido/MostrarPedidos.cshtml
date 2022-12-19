@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.Total)€
         </td>
         <td>
-            @Html.ActionLink("Detalles del pedido", "Details", new { id = item.Id }, new { @class = "text-decoration-none text-secondary" }) |
+            @Html.ActionLink("Detalles del pedido", "DetallesPedido", new { id = item.Id }, new { @class = "text-decoration-none text-secondary" }) |
 
 
             @if (item.Estado != JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.pendiente)
