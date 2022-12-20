@@ -18,9 +18,9 @@
 <ul class="nav navbar-nav navbar-right">
     
     <li>
-        @Html.ActionLink("Hola " + nombreUsu + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link link-light" })
+        @Html.ActionLink("Hola " + nombreUsu + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link " })
     </li>
-    <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link link-light">Cerrar sesión</a></li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link ">Cerrar sesión</a></li>
 
 
 </ul>
@@ -29,7 +29,7 @@
 else
 {
     <ul class="navbar-nav ms-auto">
-        <li class="nav-item">@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link link-light" })</li>
-        <li class="nav-item">@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link link-light" })</li>
+        <li class="nav-item">@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link " })</li>
+        <li class="nav-item">@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link " })</li>
     </ul>
 }

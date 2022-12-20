@@ -3,50 +3,11 @@
     ViewBag.Title = "Jewilry";
 }
 
-<div class="jumbotron">
+<div class="text-center mb-5 presentacion">
     <h1>JEWILRY</h1>
     <p class="lead"> Enriquece tu vida con los lujosos productos de bisutería que van a impresionar a todo el mundo.</p>
 </div>
 
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner cosa">
-        <div class="centro carousel-item active h-75 px-0">
-            <div>
-                <img src="~/Content/Images/131072.jpg" class="img-fluid img-thumbnail" width="40%">
-            </div>
-            
-            <h3>{$fila['titul333o']}</h3>
-            <p>{$fila['fechaformato']}</p>
-            <p>{$fila['nomPais']}</p>
-        </div>
-        <div class="centro carousel-item h-75 px-0">
-            <div>
-                <img src="~/Content/Images/131073.jpg" class="img-thumbnail img-fluid" width="40%">
-            </div>
-            <h3>{$fila['titul333o']}</h3>
-            <p>{$fila['fechaformato']}</p>
-            <p>{$fila['nomPais']}</p>
-        </div>
-        <div class="centro carousel-item">
-            <div>
-                <img src="~/Content/Images/131074.jpg" class="img-fluid img-thumbnail cosa" width="40%">
-            </div>
-            <h3>{$fila['titul333o']}</h3>
-            <p>{$fila['fechaformato']}</p>
-            <p>{$fila['nomPais']}</p>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+        @{ Html.RenderAction("Carousel", "Articulo");}
+
+    

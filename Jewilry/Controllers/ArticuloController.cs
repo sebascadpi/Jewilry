@@ -31,7 +31,6 @@ namespace Jewilry.Controllers
         }
         public ActionResult PorCategoria(int id)
         {
-            System.Diagnostics.Debug.WriteLine("holaaaaa" + id);
             SessionInitialize();
             ArticuloCAD cadArt = new ArticuloCAD(session);
             CategoriaCAD cadCat = new CategoriaCAD(session);
@@ -51,9 +50,16 @@ namespace Jewilry.Controllers
         // GET: Articulo/Details/5
         public ActionResult Details(int id)
         {
-            ArticuloEN artEN2 = new ArticuloCAD().ReadOIDDefault(id);
+            SessionInitialize();
+            ArticuloCAD cadArt = new ArticuloCAD(session);
+            ArticuloCEN cen = new ArticuloCEN(cadArt);
+
+
+            ArticuloEN artEN2 = cen.DameArticulo(id);
 
             ArticuloViewModel listViewModel = new ArticuloAssembler().ConvertENToModelUI(artEN2);
+            SessionClose();
+
             return View(listViewModel);
         }
 
@@ -130,6 +136,21 @@ namespace Jewilry.Controllers
 
 
             return PartialView("ListaCategorias", listaCat);
+        }
+
+        [ChildActionOnly]
+        public ActionResult Carousel()
+        {
+            SessionInitialize();
+            ArticuloCAD artCAD = new ArticuloCAD(session);
+            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
+
+            IList<ArticuloEN> listEN = artCEN.DameArticulos(0, -1);
+            IEnumerable<ArticuloViewModel> listViewModel = new ArticuloAssembler().ConvertListENToModel(listEN).ToList();
+            SessionClose();
+
+
+            return PartialView("Articulos", listViewModel);
         }
 
 
