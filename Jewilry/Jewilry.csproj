@@ -343,6 +343,7 @@
     <Content Include="Views\Pedido\MostrarPedidos.cshtml" />
     <Content Include="Views\Pedido\DetallesPedido.cshtml" />
     <Content Include="Views\Shared\ListaCategorias.cshtml" />
+    <Content Include="Views\Shared\ArticulosNovedades.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

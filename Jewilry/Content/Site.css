@@ -29,6 +29,14 @@
     font-family: "Tommy_regular";
     src: url('./Fonts/tommy_regular.otf');
 }
+.carouselcontent > h3 {
+    color: var(--c1);
+    font-family: Tommy_extra;
+}
+.novedades > h4 {
+    font-family: Tommy_extra;
+    font-size: 3em;
+}
 .enlaces {
     color: #6c757d;
 }

@@ -145,5 +145,21 @@ public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.A
 {
     return _IArticuloCAD.ArticuloCategoria(p_idPedido);
 }
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloPocoStock()
+{
+    return _IArticuloCAD.ArticuloPocoStock();
+}
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloNovedades()
+{
+    return _IArticuloCAD.ArticuloNovedades();
+}
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloPrecioDesc()
+{
+    return _IArticuloCAD.ArticuloPrecioDesc();
+}
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloPrecioAsc()
+{
+    return _IArticuloCAD.ArticuloPrecioAsc();
+}
 }
 }

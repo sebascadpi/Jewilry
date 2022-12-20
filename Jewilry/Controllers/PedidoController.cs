@@ -188,6 +188,8 @@ namespace Jewilry.Controllers
 
                 }
 
+                
+
                 pedidoCEN.RealizarPedido(idencontrado);
                 Session["HayPedido"] = null;
 

@@ -50,6 +50,7 @@ namespace Jewilry.Models
 
         [Display(Prompt = "Precio del articulo", Description = "Precio del articulo", Name = "Precio")]
         [Required(ErrorMessage = "Debe indicar un precio para el articulo")]
+        [DisplayFormat(DataFormatString = "{0:0.00}")]
         [Range(minimum:0, maximum:10000, ErrorMessage = "El precio debe ser mayor que 0 y menor que 10000")]
         public double Precio { get; set; }
 

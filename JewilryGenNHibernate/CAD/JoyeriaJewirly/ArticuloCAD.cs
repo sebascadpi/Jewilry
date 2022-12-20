@@ -462,5 +462,125 @@ public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.A
 
     return result;
 }
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloPocoStock()
+{
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> result;
+    try
+    {
+        SessionInitializeTransaction();
+        //String sql = @"FROM ArticuloEN self where select art FROM ArticuloEN as art where art.Stock < 20";
+        //IQuery query = session.CreateQuery(sql);
+        IQuery query = (IQuery)session.GetNamedQuery("ArticuloENarticuloPocoStockHQL");
+
+        result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN>();
+        SessionCommit();
+    }
+
+    catch (Exception ex)
+    {
+        SessionRollBack();
+        if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+            throw ex;
+        throw new JewilryGenNHibernate.Exceptions.DataLayerException("Error in ArticuloCAD.", ex);
+    }
+
+
+    finally
+    {
+        SessionClose();
+    }
+
+    return result;
+}
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloNovedades()
+{
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> result;
+    try
+    {
+        SessionInitializeTransaction();
+        //String sql = @"FROM ArticuloEN self where select art FROM ArticuloEN as art where art.Stock < 20";
+        //IQuery query = session.CreateQuery(sql);
+        IQuery query = (IQuery)session.GetNamedQuery("ArticuloENarticuloNovedadesHQL").SetMaxResults(4);
+
+        result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN>();
+        SessionCommit();
+    }
+
+    catch (Exception ex)
+    {
+        SessionRollBack();
+        if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+            throw ex;
+        throw new JewilryGenNHibernate.Exceptions.DataLayerException("Error in ArticuloCAD.", ex);
+    }
+
+
+    finally
+    {
+        SessionClose();
+    }
+
+    return result;
+}
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloPrecioDesc()
+{
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> result;
+    try
+    {
+        SessionInitializeTransaction();
+        //String sql = @"FROM ArticuloEN self where select art FROM ArticuloEN as art where art.Stock < 20";
+        //IQuery query = session.CreateQuery(sql);
+        IQuery query = (IQuery)session.GetNamedQuery("ArticuloENarticuloPrecioDescHQL");
+
+        result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN>();
+        SessionCommit();
+    }
+
+    catch (Exception ex)
+    {
+        SessionRollBack();
+        if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+            throw ex;
+        throw new JewilryGenNHibernate.Exceptions.DataLayerException("Error in ArticuloCAD.", ex);
+    }
+
+
+    finally
+    {
+        SessionClose();
+    }
+
+    return result;
+}
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloPrecioAsc()
+{
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> result;
+    try
+    {
+        SessionInitializeTransaction();
+        //String sql = @"FROM ArticuloEN self where select art FROM ArticuloEN as art where art.Stock < 20";
+        //IQuery query = session.CreateQuery(sql);
+        IQuery query = (IQuery)session.GetNamedQuery("ArticuloENarticuloPrecioAscHQL");
+
+        result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN>();
+        SessionCommit();
+    }
+
+    catch (Exception ex)
+    {
+        SessionRollBack();
+        if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+            throw ex;
+        throw new JewilryGenNHibernate.Exceptions.DataLayerException("Error in ArticuloCAD.", ex);
+    }
+
+
+    finally
+    {
+        SessionClose();
+    }
+
+    return result;
+}
 }
 }

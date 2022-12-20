@@ -29,6 +29,38 @@ namespace Jewilry.Controllers
 
             return View( listViewModel);
         }
+        public ActionResult PrecioDesc()
+        {
+            //ArticuloCEN artiuloCEN = new ArticuloCEN();
+            //List<ArticuloEN> lista = artiuloCEN.DameArticulos(0, 20).ToList();
+            SessionInitialize();
+            ArticuloCAD artCAD = new ArticuloCAD(session);
+            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
+
+            IList<ArticuloEN> listEN = artCEN.ArticuloPrecioDesc();
+            IEnumerable<ArticuloViewModel> listViewModel = new ArticuloAssembler().ConvertListENToModel(listEN).ToList();
+            SessionClose();
+
+
+            return View("Index", listViewModel);
+
+        }
+        public ActionResult PrecioAsc()
+        {
+            //ArticuloCEN artiuloCEN = new ArticuloCEN();
+            //List<ArticuloEN> lista = artiuloCEN.DameArticulos(0, 20).ToList();
+            SessionInitialize();
+            ArticuloCAD artCAD = new ArticuloCAD(session);
+            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
+
+            IList<ArticuloEN> listEN = artCEN.ArticuloPrecioAsc();
+            IEnumerable<ArticuloViewModel> listViewModel = new ArticuloAssembler().ConvertListENToModel(listEN).ToList();
+            SessionClose();
+
+
+            return View("Index", listViewModel);
+
+        }
         public ActionResult PorCategoria(int id)
         {
             SessionInitialize();
@@ -145,12 +177,26 @@ namespace Jewilry.Controllers
             ArticuloCAD artCAD = new ArticuloCAD(session);
             ArticuloCEN artCEN = new ArticuloCEN(artCAD);
 
-            IList<ArticuloEN> listEN = artCEN.DameArticulos(0, -1);
+            IList<ArticuloEN> listEN = artCEN.ArticuloPocoStock();
             IEnumerable<ArticuloViewModel> listViewModel = new ArticuloAssembler().ConvertListENToModel(listEN).ToList();
             SessionClose();
 
 
             return PartialView("Articulos", listViewModel);
+        }
+        [ChildActionOnly]
+        public ActionResult Novedades()
+        {
+            SessionInitialize();
+            ArticuloCAD artCAD = new ArticuloCAD(session);
+            ArticuloCEN artCEN = new ArticuloCEN(artCAD);
+
+            IList<ArticuloEN> listEN = artCEN.ArticuloNovedades();
+            IEnumerable<ArticuloViewModel> listViewModel = new ArticuloAssembler().ConvertListENToModel(listEN).ToList();
+            SessionClose();
+
+
+            return PartialView("ArticulosNovedades", listViewModel);
         }
 
 

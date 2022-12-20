@@ -110,6 +110,13 @@
 		  <query name="ArticuloENarticuloListaHQL"><![CDATA[select art FROM ArticuloEN as art inner join art.ListaDeseos as lista inner join lista.Cliente as cli where lista is not empty and cli.Id = :p_idLista ]]></query>
 		  <query name="ArticuloENarticuloPedidoHQL"><![CDATA[select art FROM ArticuloEN as art inner join art.LineaPedido as linea inner join linea.Pedido as ped where ped.Id = :p_idPedido]]></query>
 		<query name="ArticuloENarticuloCategoriaHQL"><![CDATA[select art FROM ArticuloEN as art where art.Categoria.Id = :p_idPedido]]></query>
+			<query name="ArticuloENarticuloPocoStockHQL"><![CDATA[select art FROM ArticuloEN as art where art.Stock < 20]]></query>
+			<query name="ArticuloENarticuloNovedadesHQL"><![CDATA[select art FROM ArticuloEN as art order by art.Id Desc]]></query>
+			<query name="ArticuloENarticuloPrecioDescHQL"><![CDATA[select art FROM ArticuloEN as art order by art.Precio Desc]]></query>
+			<query name="ArticuloENarticuloPrecioAscHQL"><![CDATA[select art FROM ArticuloEN as art order by art.Precio Asc]]></query>
+
+
+
 
 		</hibernate-mapping>
 	

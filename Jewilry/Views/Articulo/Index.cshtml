@@ -16,12 +16,16 @@
 
                     <li class="list-group-item "><h4>Categorías</h4></li>
                     @{Html.RenderAction("Navigation", "Articulo"); }
+                
 
-
-
-
-
+                    <li class="list-group-item "><h4>Ordenar</h4></li>
+                    <li class="list-group-item ">@Html.ActionLink("Precio más bajo", "PrecioAsc", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="list-group-item ">@Html.ActionLink("Precio más alto", "PrecioDesc", null, htmlAttributes: new { @class = "nav-link" })</li>
                 </ul>
+
+
+
+
             </div>
         </nav>
 
