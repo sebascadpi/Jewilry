@@ -32,136 +32,137 @@
 
 
 </script>
-
-<h2>Resumen Pedido</h2>
-<div class="row">
-    <div class="col-6">
-        @{ Html.RenderAction("Navigation", "LineaPedido");}
-        @if (Session["totaldesc"] == null)
-        {
-        <div class="d-flex justify-content-end">
-            Total: @Session["total"]€
-        </div>
-        }
-        else
-        {
-            <div class="d-flex justify-content-end">
-                <div style="text-decoration:line-through;">
+<div class="p-3">
+    <h2>Resumen Pedido</h2>
+    <div class="row">
+        <div class="col-6">
+            @{ Html.RenderAction("Navigation", "LineaPedido");}
+            @if (Session["totaldesc"] == null)
+            {
+                <div class="d-flex justify-content-end">
                     Total: @Session["total"]€
                 </div>
-                Total: @Convert.ToDouble(Session["totaldesc"])€
+            }
+            else
+            {
+                <div class="d-flex justify-content-end">
+                    <div style="text-decoration:line-through;">
+                        Total: @Session["total"]€
+                    </div>
+                    Total: @Convert.ToDouble(Session["totaldesc"])€
+                </div>
+
+            }
+
+            <div class="form-horizontal">
+                <h4>¡Introduce un cupón de descuento!</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @using (Html.BeginForm("Descuento", "Pedido", FormMethod.Get))
+                {
+                    <input type="text" name="codigo" class="form-control mb-3" placeholder="Inserte código" />
+                    <input type="submit" value="Aplicar descuento" class="btn btn-primary " />
+                    @Session["ValDesc"]
+                }
             </div>
 
-        }
-
-        <div class="form-horizontal">
-            <h4>¡Introduce un cupón de descuento!</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            @using (Html.BeginForm("Descuento", "Pedido", FormMethod.Get))
-            {
-                <input type="text" name="codigo" class="form-control mb-3" placeholder="Inserte código" />
-                <input type="submit" value="Aplicar descuento" class="btn btn-primary " />
-                @Session["ValDesc"]
-            }
         </div>
 
-    </div>
-
-    <div class="col-6">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                <h4>Dirección de Envío</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Localidad, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Localidad, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Localidad, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Provincia, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Provincia, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CodigoPostal, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.CodigoPostal, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CodigoPostal, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <br />
-
-                <h4>Método de pago</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                <div class="form-group">
-                    Tipo de Pago
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.TipoPago, new List<SelectListItem>
-                                    {
-                                        new SelectListItem {Text = "Tarjeta", Value = "Tarjeta"},
-
-                                    }, "Selecciona el tipo de pago", new { @onchange = "display();", @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.TipoPago, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div id="tipoTar">
-                    <div class="form-group" >
-                        Tipo de tarjeta
+        <div class="col-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <h4>Dirección de Envío</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.TipoTarjeta, new List<SelectListItem>
-                                        {
-                                            new SelectListItem {Text = "Visa", Value = "Visa"},
-                                            new SelectListItem {Text = "Mastercard", Value = "Mastercard"}
-                                        }, "Selecciona la tarjeta", new { @onchange = "", @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.TipoTarjeta, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        Número de tarjeta
+                        @Html.LabelFor(model => model.Localidad, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.NumeroTarjeta, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.NumeroTarjeta, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Localidad, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Localidad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Provincia, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Provincia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CodigoPostal, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CodigoPostal, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CodigoPostal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <h4>Método de pago</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        Tipo de Pago
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.TipoPago, new List<SelectListItem>
+                                        {
+                                            new SelectListItem {Text = "Tarjeta", Value = "Tarjeta"},
+
+                                        }, "Selecciona el tipo de pago", new { @onchange = "display();", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TipoPago, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div id="tipoTar">
+                        <div class="form-group">
+                            Tipo de tarjeta
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.TipoTarjeta, new List<SelectListItem>
+                                            {
+                                                new SelectListItem {Text = "Visa", Value = "Visa"},
+                                                new SelectListItem {Text = "Mastercard", Value = "Mastercard"}
+                                            }, "Selecciona la tarjeta", new { @onchange = "", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TipoTarjeta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            Número de tarjeta
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NumeroTarjeta, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NumeroTarjeta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group mt-3">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Confirmar el pedido" class="btn btn-primary" />
                         </div>
                     </div>
                 </div>
-
-
-
-
-                <div class="form-group mt-3">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Confirmar el pedido" class="btn btn-primary" />
-                    </div>
-                </div>
-            </div>
-        }
+            }
 
 
 
 
         </div>
+    </div>
 </div>

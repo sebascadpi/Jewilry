@@ -3,50 +3,52 @@
 @{
     ViewBag.Title = "MostrarPedidos";
 }
-
-<h2>Mis Pedidos</h2>
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)€
-        </td>
-        <td>
-            @Html.ActionLink("Detalles del pedido", "DetallesPedido", new { id = item.Id }, new { @class = "text-decoration-none text-secondary" }) |
+<div class="p-3">
+    <h2>Mis Pedidos</h2>
 
 
-            @if (item.Estado != JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.pendiente)
-            {
-                @Html.Label("Cancelar pedido", new { @class = "text-decoration-none text-secondary" })
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
 
-            }
-            else
-            {
-                @Html.ActionLink("Cancelar pedido", "CancelarPedido", new { id = item.Id }, new { @class = "text-decoration-none text-secondary" })
-            }
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)€
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles del pedido", "DetallesPedido", new { id = item.Id }, new { @class = "text-decoration-none enlaces" }) |
 
-</table>
+
+                    @if (item.Estado != JewilryGenNHibernate.Enumerated.JoyeriaJewirly.EstadoPedidoEnum.pendiente)
+                    {
+                        @Html.Label("Pedido cancelado", new { @class = "text-decoration-none text-danger" })
+
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Cancelar pedido", "CancelarPedido", new { id = item.Id }, new { @class = "text-decoration-none enlaces" })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

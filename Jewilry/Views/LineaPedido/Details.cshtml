@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Jewilry.Models.LineaPedidoViewModel>
 
-
+<div class="p-3">
     <table class="table">
 
         <tr>
@@ -31,9 +31,9 @@
                     @Html.DisplayFor(modelItem => item.NombreArticulo)
                 </td>
                 <td>
-                    <input type="button" value="-" class="btn btn-light" onclick="location.href='@Url.Action("Menos", "LineaPedido", new { id = item.Id })'" />
+                    <input type="button" value="-" class="btn btn-primary" onclick="location.href='@Url.Action("Menos", "LineaPedido", new { id = item.Id })'" />
                     @Html.DisplayFor(modelItem => item.Unidades)
-                    <input type="button" value="+" class="btn btn-light" onclick="location.href='@Url.Action("Cantidad", "LineaPedido", new { id = item.Id })'" />
+                    <input type="button" value="+" class="btn btn-primary" onclick="location.href='@Url.Action("Cantidad", "LineaPedido", new { id = item.Id })'" />
 
                 </td>
                 <td>
@@ -41,7 +41,7 @@
                 </td>
                 <td>
                     |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "text-decoration-none text-secondary" })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "text-decoration-none enlaces" })
                 </td>
             </tr>
         }
@@ -61,5 +61,5 @@
 
     </table>
     @Html.ActionLink("Tramitar", "ResumenPedido", "Pedido", null, new { @class = "btn btn-primary" })
-
+</div>
 

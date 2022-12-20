@@ -6,28 +6,84 @@
     --c5: #fff0aa;
     --c6: #b0e57c;
     --c7: #FFD6D6; /*rosa claro*/
-    --b: #fff;
+    --c8: #ebe7e8; /*rosa claro*/
     --b2: #fff;
     --t: #2c2c2c;
     --s: rgba(255, 255, 255, 0.5); /* sombra */
     --sc1: rgba(255, 174, 174, 0.5); /*sombra rosa*/
     --p: #eb445a; /* peligro */
 }
-.main-menu{
+@font-face {
+    font-family: "Tommy";
+    src: url('./Fonts/tommy.otf');
+}
+@font-face {
+    font-family: "Tommy_extra";
+    src: url('./Fonts/tommy_bold.otf');
+}
+@font-face {
+    font-family: "Tommy_bold";
+    src: url('./Fonts/tommy_extra.otf');
+}
+@font-face {
+    font-family: "Tommy_regular";
+    src: url('./Fonts/tommy_regular.otf');
+}
+.enlaces {
+    color: #6c757d;
+}
+.enlaces:hover {
+    color: var(--c1);
+}
+.main-menu {
     border-bottom: 1px solid #d0d1d2;
+    font-family: Tommy_regular;
+    text-transform: uppercase;
 }
 .cosa {
     object-fit: cover;
 }
 
+.rosa{
+    background-color: var(--c1);
+}
+.rosa > div {
+    font-family: Tommy_extra;
+    color: white;
+}
+.rosa > div > h1 {
+    font-size: 5em;
+}
+.customCarousel {
+    margin: 0em 0em 0 0em;
+    background-color: var(--c8);
+    font-family: Tommy_extra;
+    text-transform: uppercase;
+    color: black;
+}
 body {
-    font-family: 'Leelawadee UI', sans-serif !important;
+    font-family: 'Tommy_regular','Leelawadee UI', sans-serif !important;
     padding-top: 50px;
     padding-bottom: 20px;
 }
 
 footer {
-    font-family: 'Leelawadee UI', sans-serif !important;
+    font-family: 'Tommy_regular','Leelawadee UI', sans-serif !important;
+}
+
+@media (min-width: 1200px) {
+    .customCarousel {
+        margin: 1em 10em 0 10em;
+    }
+
+    .rosa > div {
+        font-family: Tommy_extra;
+        color: white;
+    }
+
+    .rosa > div > h1 {
+        font-size: 10em;
+    }
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -112,21 +168,21 @@ textarea {
 }
 
 .btn {
-    background-color: deepskyblue;
+    background-color: var(--c1);
     border-radius: 6px;
     display: inline-block;
     font-size: inherit;
     padding: 0.5em;
     transition: background-color .3s;
-    border: 1px solid deepskyblue;
-    font-family: 'Poppins', sans-serif;
+    border: 1px solid var(--c1);
+    font-family: Tommy_regular, sans-serif;
 }
 
 .btn:hover {
     cursor: pointer;
     background-color: white;
-    color: deepskyblue;
-    border: 1px solid deepskyblue;
+    color: var(--c1);
+    border: 1px solid var(--c1);
 }
 
 .grandote { /*ajusta botons al tamany del contenedor*/
@@ -139,8 +195,6 @@ textarea {
 }
 
 footer {
-    background-color: var(--c1);
-    color: var(--b);
-    font-family: 'Lora', serif;
+    
     padding: 0.1em;
 }

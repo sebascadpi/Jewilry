@@ -31,6 +31,7 @@ namespace Jewilry.Controllers
         }
 
         // GET: Articulo/Details/5
+        [Authorize]
         public ActionResult Details(int id)
         {
             PedidoEN artEN2 = new PedidoCAD().ReadOIDDefault(id);
@@ -38,7 +39,7 @@ namespace Jewilry.Controllers
             PedidoViewModel listViewModel = new PedidoAssembler().ConvertENToModelUI(artEN2);
             return View(listViewModel);
         }
-
+        [Authorize]
         public ActionResult DetallesPedido(int id)
         {
             LineaPedidoCAD linPedCAD2 = new LineaPedidoCAD(session);
@@ -54,7 +55,7 @@ namespace Jewilry.Controllers
             PedidoViewModel listViewModel = new PedidoAssembler().ConvertENToModelUI(pedidoEN);
             return View(listViewModel);
         }
-
+        [Authorize]
         public ActionResult ResumenPedido()
         {
 
@@ -194,6 +195,7 @@ namespace Jewilry.Controllers
             }
             return View("ResumenPedido");
         }
+        [Authorize]
         public ActionResult MostrarPedidos()
         {
             SessionInitialize();

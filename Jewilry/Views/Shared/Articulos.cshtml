@@ -1,11 +1,7 @@
 ﻿@model IEnumerable<Jewilry.Models.ArticuloViewModel>
 
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
+<div id="carouselExampleIndicators" class="carousel slide customCarousel" data-bs-ride="carousel">
+
     <div class="carousel-inner cosa">
         @{
             int contador = 0;
@@ -19,12 +15,14 @@
                 <div class="centro carousel-item active h-75 px-0">
                     <div>
                         <a href='@Url.Action("Details", "Articulo", routeValues: new { id = item.Id })'>
-                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.Foto)" class="img-fluid img-thumbnail" width="20%">
+                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.Foto)" class="img-fluid img-thumbnail" width="25%">
                         </a>
                     </div>
 
-                    <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
-                    <p>@Html.DisplayFor(modelItem => item.Precio)</p>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
+                        <p>@Html.DisplayFor(modelItem => item.Precio)</p>
+                    </div>
                 </div>
                 contador++;
             }
@@ -32,11 +30,15 @@
             {
                 <div class="centro carousel-item h-75 px-0">
                     <div>
-                        <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.Foto)" class="img-fluid img-thumbnail" width="20%">
+                        <a href='@Url.Action("Details", "Articulo", routeValues: new { id = item.Id })'>
+                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.Foto)" class="img-fluid img-thumbnail" width="25%">
+                        </a>
                     </div>
 
-                    <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
-                    <p>@Html.DisplayFor(modelItem => item.Precio)</p>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
+                        <p>@Html.DisplayFor(modelItem => item.Precio)</p>
+                    </div>
                 </div>
             }
 
@@ -44,6 +46,7 @@
         }
 
     </div>
+    
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -52,6 +55,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+    
 </div>
 
 
