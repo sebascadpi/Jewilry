@@ -22,6 +22,9 @@ namespace Jewilry.Assemblers
             art.Marca = en.Marca;
             art.Material = en.Material;
             art.Tallas = en.Tallas;
+            art.NombreCategoria = en.Categoria.Nombre;
+            art.IdCategoria = en.Categoria.Id;
+
 
 
 

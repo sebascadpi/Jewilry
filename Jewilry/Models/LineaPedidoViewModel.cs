@@ -13,6 +13,10 @@ namespace Jewilry.Models
         public int Id { get; set; }
 
         [ScaffoldColumn(false)]
+        [Display(Prompt = "Articulo del LineaPedido", Description = "Articulo del LineaPedido", Name = "IdArticulo")]
+        public int IdArticulo { get; set; }
+
+        [ScaffoldColumn(false)]
         [Display(Prompt = "Articulo del LineaPedido", Description = "Articulo del LineaPedido", Name = "Foto")]
         public string FotoArticulo { get; set; }
 

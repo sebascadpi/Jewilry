@@ -402,33 +402,65 @@ public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.A
 }
 public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloPedido (int p_idPedido)
 {
-        System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> result;
-        try
-        {
-                SessionInitializeTransaction ();
-                //String sql = @"FROM ArticuloEN self where select art FROM ArticuloEN as art inner join art.LineaPedido as linea inner join linea.Pedido as ped where ped.Id = :p_idPedido";
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> result;
+    try
+    {
+            SessionInitializeTransaction ();
+            //String sql = @"FROM ArticuloEN self where select art FROM ArticuloEN as art inner join art.LineaPedido as linea inner join linea.Pedido as ped where ped.Id = :p_idPedido";
+            //IQuery query = session.CreateQuery(sql);
+            IQuery query = (IQuery)session.GetNamedQuery ("ArticuloENarticuloPedidoHQL");
+            query.SetParameter ("p_idPedido", p_idPedido);
+
+            result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN>();
+            SessionCommit ();
+    }
+
+    catch (Exception ex) {
+            SessionRollBack ();
+            if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+                    throw ex;
+            throw new JewilryGenNHibernate.Exceptions.DataLayerException ("Error in ArticuloCAD.", ex);
+    }
+
+
+    finally
+    {
+            SessionClose ();
+    }
+
+    return result;
+}
+
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloCategoria(int p_idPedido)
+{
+    System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> result;
+    try
+    {
+        SessionInitializeTransaction();
+                //String sql = @"FROM ArticuloEN self where select art FROM ArticuloEN as art where art.Categoria.Id = :p_idPedido";
                 //IQuery query = session.CreateQuery(sql);
-                IQuery query = (IQuery)session.GetNamedQuery ("ArticuloENarticuloPedidoHQL");
-                query.SetParameter ("p_idPedido", p_idPedido);
+                IQuery query = (IQuery)session.GetNamedQuery("ArticuloENarticuloCategoriaHQL");
+        query.SetParameter("p_idPedido", p_idPedido);
 
-                result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN>();
-                SessionCommit ();
-        }
+        result = query.List<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN>();
+        SessionCommit();
+    }
 
-        catch (Exception ex) {
-                SessionRollBack ();
-                if (ex is JewilryGenNHibernate.Exceptions.ModelException)
-                        throw ex;
-                throw new JewilryGenNHibernate.Exceptions.DataLayerException ("Error in ArticuloCAD.", ex);
-        }
+    catch (Exception ex)
+    {
+        SessionRollBack();
+        if (ex is JewilryGenNHibernate.Exceptions.ModelException)
+            throw ex;
+        throw new JewilryGenNHibernate.Exceptions.DataLayerException("Error in ArticuloCAD.", ex);
+    }
 
 
-        finally
-        {
-                SessionClose ();
-        }
+    finally
+    {
+        SessionClose();
+    }
 
-        return result;
+    return result;
 }
 }
 }

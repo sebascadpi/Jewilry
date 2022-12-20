@@ -1,0 +1,10 @@
+﻿@model IEnumerable<JewilryGenNHibernate.EN.JoyeriaJewirly.CategoriaEN>
+
+
+
+@foreach (var item in Model)
+{
+        <li class="nav-item">@Html.ActionLink(item.Nombre, "PorCategoria", "Articulo", new { id = item.Id}, new {@class = "nav-link link-light" })</li>        
+}
+
+

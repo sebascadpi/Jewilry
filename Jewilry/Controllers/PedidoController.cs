@@ -257,6 +257,16 @@ namespace Jewilry.Controllers
             return RedirectToAction("ResumenPedido");
         }
 
+        public ActionResult CancelarPedido(int id)
+        {
+            PedidoCAD pedidoCAD = new PedidoCAD();
+            PedidoCEN pedidoCEN = new PedidoCEN(pedidoCAD);
+
+            pedidoCEN.CancelarPedido(id);
+
+            return RedirectToAction("MostrarPedidos");
+        }
+
         public ActionResult Create(int id, PedidoViewModel val)
         {
             int currentUserId = 0;

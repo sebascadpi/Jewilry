@@ -52,13 +52,16 @@
 
 </div>
 
-<p>
-    @Html.ActionLink("Create","Create", "Valoracion", new { id = Model.Id }, null)
-</p>
+@if (Session["Usuario"] != null)
+{
+    <h4>
 
+        @Html.ActionLink("Escriba un comentario", "Create", "Valoracion", new { id = Model.Id }, null)
+    </h4>
+}
 <div>
     <hr />
-    
+
     @{ Html.RenderAction("Navigation", "Valoracion", new { id = Model.Id });}
 
 </div>

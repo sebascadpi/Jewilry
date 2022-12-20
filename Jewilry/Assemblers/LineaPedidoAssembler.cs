@@ -22,6 +22,8 @@ namespace Jewilry.Assemblers
 
             art.NombreArticulo = en.Articulo.Nombre;
             art.TotalPedido = en.Pedido.Total;
+            art.IdArticulo = en.Articulo.Id;
+
 
 
 

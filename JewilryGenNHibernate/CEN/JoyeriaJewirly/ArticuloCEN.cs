@@ -141,5 +141,9 @@ public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.A
 {
         return _IArticuloCAD.ArticuloPedido (p_idPedido);
 }
+public System.Collections.Generic.IList<JewilryGenNHibernate.EN.JoyeriaJewirly.ArticuloEN> ArticuloCategoria(int p_idPedido)
+{
+    return _IArticuloCAD.ArticuloCategoria(p_idPedido);
+}
 }
 }

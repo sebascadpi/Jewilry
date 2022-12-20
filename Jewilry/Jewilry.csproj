@@ -338,6 +338,7 @@
     <Content Include="Views\Pedido\ResumenPedido.cshtml" />
     <Content Include="Views\Pedido\MostrarPedidos.cshtml" />
     <Content Include="Views\Pedido\DetallesPedido.cshtml" />
+    <Content Include="Views\Shared\ListaCategorias.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

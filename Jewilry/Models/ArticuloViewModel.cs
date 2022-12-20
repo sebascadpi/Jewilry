@@ -12,6 +12,12 @@ namespace Jewilry.Models
 
         public int Id { get; set; }
 
+        [ScaffoldColumn(false)]
+        public int IdCategoria { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string NombreCategoria { get; set; }
+
         [Display(Prompt = "Nombre del articulo", Description = "Nombre del articulo", Name = "Nombre")]
         [Required(ErrorMessage = "Debe indicar un nombre para el articulo")]
         [StringLength(maximumLength:200, ErrorMessage = "El nombre no puede tener mas de 200 caracteres")]

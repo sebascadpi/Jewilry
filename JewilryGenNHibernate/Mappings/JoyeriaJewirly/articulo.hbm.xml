@@ -109,5 +109,7 @@
 		  <query name="ArticuloENReadAllHQL">from ArticuloEN</query>
 		  <query name="ArticuloENarticuloListaHQL"><![CDATA[select art FROM ArticuloEN as art inner join art.ListaDeseos as lista inner join lista.Cliente as cli where lista is not empty and cli.Id = :p_idLista ]]></query>
 		  <query name="ArticuloENarticuloPedidoHQL"><![CDATA[select art FROM ArticuloEN as art inner join art.LineaPedido as linea inner join linea.Pedido as ped where ped.Id = :p_idPedido]]></query>
+		<query name="ArticuloENarticuloCategoriaHQL"><![CDATA[select art FROM ArticuloEN as art where art.Categoria.Id = :p_idPedido]]></query>
+
 		</hibernate-mapping>
 	

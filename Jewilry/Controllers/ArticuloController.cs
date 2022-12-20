@@ -27,7 +27,25 @@ namespace Jewilry.Controllers
             SessionClose();
 
 
-            return View(listViewModel);
+            return View( listViewModel);
+        }
+        public ActionResult PorCategoria(int id)
+        {
+            System.Diagnostics.Debug.WriteLine("holaaaaa" + id);
+            SessionInitialize();
+            ArticuloCAD cadArt = new ArticuloCAD(session);
+            CategoriaCAD cadCat = new CategoriaCAD(session);
+            ArticuloCEN cen = new ArticuloCEN(cadArt);
+            IList<ArticuloEN> listArtEn = cen.ArticuloCategoria(id);
+            IEnumerable<ArticuloViewModel> listArt = new ArticuloAssembler().ConvertListENToModel(listArtEn).ToList();
+            CategoriaEN catEN = cadCat.ReadOIDDefault(id);
+
+            ViewData["IdCategoria"] = id;
+            if (catEN != null)
+                ViewData["NombreCategoria"] = catEN.Nombre;
+
+            SessionClose();
+            return View("Index", listArt);
         }
 
         // GET: Articulo/Details/5
@@ -104,7 +122,16 @@ namespace Jewilry.Controllers
                 return View();
             }
         }
+        [ChildActionOnly]
+        public ActionResult Navigation()
+        {
+            CategoriaCEN cen = new CategoriaCEN();
+            IEnumerable<CategoriaEN> listaCat = cen.DameCategorias(0, -1).ToList();
 
-        
+
+            return PartialView("ListaCategorias", listaCat);
+        }
+
+
     }
 }
