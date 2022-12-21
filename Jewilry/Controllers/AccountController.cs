@@ -429,6 +429,7 @@ namespace Jewilry.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["Usuario"] = null;
             return RedirectToAction("Index", "Home");
         }
 

@@ -20,6 +20,7 @@ namespace Jewilry.Models
 
         [Display(Prompt = "Valor del articulo", Description = "Valor del articulo", Name = "Valor")]
         [Required(ErrorMessage = "Debe indicar un Valor para el articulo")]
+        [Range(minimum: 0, maximum: 5, ErrorMessage = "La valoración tiene que ser entre 0 y 5")]
         public int Valor { get; set; }
 
         [Display(Prompt = "Articulo del articulo", Description = "Articulo del articulo", Name = "Articulo")]
