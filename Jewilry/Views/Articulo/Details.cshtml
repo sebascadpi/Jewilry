@@ -53,7 +53,7 @@
                     }
                     else
                     {
-                        @Html.ActionLink("Necesita iniciar sesión para Añadir al carrito", "Details", "Articulo", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Necesita iniciar sesión para Añadir al carrito", "Login", "Account", null, new { id = "loginLink", @class = "btn btn-primary" })
                     }
                 </div>
             </row>
