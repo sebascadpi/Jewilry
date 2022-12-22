@@ -62,6 +62,14 @@
 .rosa > div > h1 {
     font-size: 5em;
 }
+
+.img-carrusel {
+    width: 100%;
+    max-width: 35em;
+    max-height: 35em
+}
+
+
 .customCarousel {
     margin: 0em 0em 0 0em;
     background-color: var(--c8);
